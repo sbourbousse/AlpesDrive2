@@ -9,7 +9,7 @@ import { BehaviorSubject } from "rxjs";
 })
 export class NavbarComponent implements OnInit {
   constructor(private authService: AuthService) {}
-  private isAuth: boolean;
+  isAuth: boolean;
 
   ngOnInit() {
     this.authService.isAuth.subscribe(isAuth => (this.isAuth = isAuth));
