@@ -13,6 +13,7 @@ import { ProducteurComponent } from "./auth/signup/producteur/producteur.compone
 import { PointRelaisComponent } from "./auth/signup/point-relais/point-relais.component";
 import { ClientComponent } from "./auth/signup/client/client.component";
 import { FourOhFourComponent } from "./four-oh-four/four-oh-four.component";
+import { EntrepriseComponent } from './auth/signup/entreprise/entreprise.component';
 
 const appRoutes: Routes = [
   { path: "accueil", component: HomeComponent },
@@ -35,7 +36,8 @@ const appRoutes: Routes = [
     ProducteurComponent,
     PointRelaisComponent,
     ClientComponent,
-    FourOhFourComponent
+    FourOhFourComponent,
+    EntrepriseComponent
   ],
   imports: [
     BrowserModule,
