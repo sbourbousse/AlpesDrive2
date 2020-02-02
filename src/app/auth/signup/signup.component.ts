@@ -57,6 +57,10 @@ export class SignupComponent implements OnInit {
     const email = this.signupForm.get("email").value;
     const password = this.signupForm.get("password").value;
 
-    return new User(email, password);
+    if (this.signupForm.valid) {
+      return new User(email, password);
+    } else {
+      return null;
+    }
   }
 }
