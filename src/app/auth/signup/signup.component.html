@@ -1,5 +1,36 @@
-<a routerLink="producteur"><button>Vous êtes un producteur</button></a>
-<a routerLink="point-relais"><button>Vous êtes un point relais</button></a>
-<a routerLink="client"><button>Vous êtes un client</button></a>
+<!-- User form -->
+<form [formGroup]="signupForm">
+  <input type="text" placeholder="Votre email" formControlName="email" />
+  <input
+    type="text"
+    placeholder="Votre mot de passe"
+    formControlName="password"
+  />
+</form>
 
+<!-- Chosse a user type -->
+<div>
+  <button
+    (click)="signupType('producteur')"
+    [disabled]="userType == 'producteur'"
+  >
+    Vous êtes un producteur
+  </button>
+  <button
+    (click)="signupType('point-relais')"
+    [disabled]="userType == 'point-relais'"
+  >
+    Vous êtes un point relais
+  </button>
+  <button (click)="signupType('client')" [disabled]="userType == 'client'">
+    Vous êtes un client
+  </button>
+</div>
 
+<!-- User specific forms -->
+<app-point-relais *ngIf="userType == 'point-relais'"></app-point-relais>
+<app-producteur
+  *ngIf="userType == 'producteur'"
+  [user]="this.getUser()"
+></app-producteur>
+<app-client *ngIf="userType == 'client'"></app-client>

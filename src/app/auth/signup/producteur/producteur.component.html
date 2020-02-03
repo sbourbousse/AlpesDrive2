@@ -1,1 +1,19 @@
-<p>producteur works!</p>
+<!-- User form -->
+<form [formGroup]="producteurForm">
+  <input type="text" placeholder="Nom" formControlName="lastname" />
+  <input type="text" placeholder="Prénom" formControlName="firstname" />
+  <input type="text" placeholder="Téléphone" formControlName="phone" />
+  <input type="text" placeholder="Adresse" formControlName="address" />
+  <input type="text" placeholder="Ville" formControlName="city" />
+  <input type="text" placeholder="Code postale" formControlName="postCode" />
+
+  <button
+    type="submit"
+    [disabled]="producteurForm.invalid"
+    (click)="submitForm()"
+  >
+    Valider
+  </button>
+</form>
+
+<app-entreprise></app-entreprise>
