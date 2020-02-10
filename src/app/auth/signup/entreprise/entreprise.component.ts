@@ -26,7 +26,8 @@ export class EntrepriseComponent implements OnInit {
     //TODO validateurs de l'entreprise
     this.entrepriseForm = this.formBuilder.group({
       id: ["", [Validators.required]],
-      name: ["", [Validators.required]]
+      name: ["", [Validators.required]],
+      iBAN: ["", [Validators.minLength(27), Validators.maxLength(34)]]
     });
   }
 
@@ -34,9 +35,12 @@ export class EntrepriseComponent implements OnInit {
   getEntreprise(): Entreprise {
     const id = this.entrepriseForm.get("id").value;
     const name = this.entrepriseForm.get("name").value;
+    const iBAN = this.entrepriseForm.get("iBAN").value;
 
     if (this.entrepriseForm.valid) {
-      return new Entreprise(id, name);
+      if (this.entrepriseForm.get("iBAN").valid)
+        return new Entreprise(id, name, iBAN);
+      else return new Entreprise(id, name);
     } else {
       return null;
     }

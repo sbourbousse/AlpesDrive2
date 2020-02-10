@@ -96,14 +96,16 @@ export class ProducteurComponent implements OnInit {
 
   //Souscription du formulaire
   submitForm() {
+    console.log(this.getProducteur());
     if (this.getProducteur() != null) {
       this.authService.signupProcteur(this.getProducteur()).subscribe(
         res => {
-          if (res.auth.status == true) {
-            //this.route.navigate(["/"]); //TODO
+          if (res["new"]["status"] == true) {
+            this.route.navigate(["/inscription/mail"]);
             console.log(res);
           } else {
-            this.errorMessage = res.auth.message;
+            this.errorMessage = res["new"]["message"];
+            console.log(res);
           }
         },
         error => {
