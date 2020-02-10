@@ -13,7 +13,8 @@ import { ProducteurComponent } from "./auth/signup/producteur/producteur.compone
 import { PointRelaisComponent } from "./auth/signup/point-relais/point-relais.component";
 import { ClientComponent } from "./auth/signup/client/client.component";
 import { FourOhFourComponent } from "./four-oh-four/four-oh-four.component";
-import { EntrepriseComponent } from './auth/signup/entreprise/entreprise.component';
+import { EntrepriseComponent } from "./auth/signup/entreprise/entreprise.component";
+import { MailComponent } from "./auth/signup/mail/mail.component";
 
 const appRoutes: Routes = [
   { path: "accueil", component: HomeComponent },
@@ -22,6 +23,7 @@ const appRoutes: Routes = [
   { path: "inscription/producteur", component: ProducteurComponent },
   { path: "inscription/point-relais", component: PointRelaisComponent },
   { path: "inscription/client", component: ClientComponent },
+  { path: "inscription/mail", component: MailComponent },
   { path: "", redirectTo: "/accueil", pathMatch: "full" },
   { path: "**", component: FourOhFourComponent }
 ];
@@ -37,7 +39,8 @@ const appRoutes: Routes = [
     PointRelaisComponent,
     ClientComponent,
     FourOhFourComponent,
-    EntrepriseComponent
+    EntrepriseComponent,
+    MailComponent
   ],
   imports: [
     BrowserModule,
