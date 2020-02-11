@@ -14,7 +14,8 @@ export class PointRelaisService {
   constructor(private http: HttpClient) {}
 
   private pointRelaisListUrl: string = "http://sylvain-bourbousse.fr/api/ ";
-  private pointRelaisTypeListUrl: string = "http://sylvain-bourbousse.fr/api/ ";
+  private pointRelaisTypeListUrl: string =
+    "http://sylvain-bourbousse.fr/api/pointRelaisType_list.php ";
 
   httpOptions = {
     headers: new HttpHeaders({ "Content-Type": "application/json" })
@@ -22,7 +23,6 @@ export class PointRelaisService {
 
   getPointRelais() {} //TODO
   getPointRelaisType() {
-    let pointRelaisTypeList: PointRelaisType[];
     let response = this.http
       .get(this.pointRelaisTypeListUrl)
       .pipe(catchError(this.handleError<User>("signupProducteur")));

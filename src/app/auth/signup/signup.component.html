@@ -28,7 +28,10 @@
 </div>
 
 <!-- User specific forms -->
-<app-point-relais *ngIf="userType == 'point-relais'"></app-point-relais>
+<app-point-relais
+  *ngIf="userType == 'point-relais'"
+  [user]="this.getUser()"
+></app-point-relais>
 <app-producteur
   *ngIf="userType == 'producteur'"
   [user]="this.getUser()"

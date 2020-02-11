@@ -25,6 +25,7 @@ export class PointRelaisComponent implements OnInit {
 
   ngOnInit() {
     this.initForm();
+    this.getPointRelaisType();
   }
 
   onCounterChange(entreprise: Entreprise) {
@@ -37,6 +38,7 @@ export class PointRelaisComponent implements OnInit {
   errorMessage: string;
   userType: string;
   monEntreprise: Entreprise;
+  tabPointRelaisType: PointRelaisType[];
 
   initForm() {
     this.pointRelaisForm = this.formBuilder.group({
@@ -72,6 +74,26 @@ export class PointRelaisComponent implements OnInit {
     });
   }
 
+  getPointRelaisType() {
+    this.tabPointRelaisType = [];
+    this.pointRelaisService.getPointRelaisType().subscribe(
+      res => {
+        for (let i = 0; i < res["data"].length; i++) {
+          this.tabPointRelaisType.push(
+            new PointRelaisType(
+              res["data"][i]["pointRelaisTypeId"],
+              res["data"][i]["pointRelaisTypeLibelle"]
+            )
+          );
+        }
+        //console.log(this.tabPointRelaisType);
+      },
+      error => {
+        console.log("Connexion au serveur impossible.");
+      }
+    );
+  }
+
   getPointRelais(): PointRelais {
     const email = this.user.email;
     const password = this.user.password;
@@ -81,6 +103,8 @@ export class PointRelaisComponent implements OnInit {
     const address = this.pointRelaisForm.get("address").value;
     const city = this.pointRelaisForm.get("city").value;
     const postCode = this.pointRelaisForm.get("postCode").value;
+    const type = this.pointRelaisForm.get("type").value;
+
     if (this.pointRelaisForm.valid) {
       return new PointRelais(
         email,
@@ -91,6 +115,7 @@ export class PointRelaisComponent implements OnInit {
         address,
         city,
         postCode,
+        type,
         this.monEntreprise
       );
     } else {
@@ -102,8 +127,9 @@ export class PointRelaisComponent implements OnInit {
   submitForm() {
     console.log(this.getPointRelais());
     if (this.getPointRelais() != null) {
-      this.authService.signupProcteur(this.getPointRelais()).subscribe(
+      this.authService.signupPointRelais(this.getPointRelais()).subscribe(
         res => {
+          console.log(res);
           if (res["new"]["status"] == true) {
             this.route.navigate(["/inscription/mail"]);
             console.log(res);

@@ -4,6 +4,7 @@ import { User } from "../models/user.model";
 import { catchError, map, tap } from "rxjs/operators";
 import { Observable, of, BehaviorSubject } from "rxjs";
 import { Producteur } from "../models/producteur.model";
+import { PointRelais } from "../models/pointRelais.model";
 
 @Injectable({
   providedIn: "root"
@@ -16,6 +17,8 @@ export class AuthService {
   private authUrl: string = "http://sylvain-bourbousse.fr/api/auth.php";
   private signupProducteurUrl: string =
     "http://sylvain-bourbousse.fr/api/producteur_add.php";
+  private signupPointRelaisUrl: string =
+    "http://sylvain-bourbousse.fr/api/pointRelais_add.php";
 
   httpOptions = {
     headers: new HttpHeaders({ "Content-Type": "application/json" })
@@ -49,6 +52,17 @@ export class AuthService {
       .post(this.signupProducteurUrl, JSON.stringify(unProducteur))
       .pipe(
         tap(() => console.log(`Sign up user w/ email=${unProducteur.email}`)),
+        catchError(this.handleError<User>("signupProducteur"))
+      );
+
+    return response;
+  }
+
+  signupPointRelais(unPointRelais: PointRelais) {
+    let response = this.http
+      .post(this.signupPointRelaisUrl, JSON.stringify(unPointRelais))
+      .pipe(
+        tap(() => console.log(`Sign up user w/ email=${unPointRelais.email}`)),
         catchError(this.handleError<User>("signupProducteur"))
       );
 

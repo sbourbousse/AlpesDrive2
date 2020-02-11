@@ -3,11 +3,16 @@
   <input type="text" placeholder="Nom" formControlName="lastname" />
   <input type="text" placeholder="Prénom" formControlName="firstname" />
   <input type="text" placeholder="Téléphone" formControlName="phone" />
-  <span *ngIf="pointRelaisForm.get('phone').valid">phonenumber correct</span>
   <input type="text" placeholder="Adresse" formControlName="address" />
   <input type="text" placeholder="Ville" formControlName="city" />
   <input type="text" placeholder="Code postale" formControlName="postCode" />
-  <select type="text" formControlName="type"> </select>
+  <select type="text" formControlName="type">
+    <option
+      *ngFor="let pointRelaisType of tabPointRelaisType"
+      [value]="pointRelaisType.id"
+      >{{ pointRelaisType.libelle }}</option
+    >
+  </select>
 </form>
 
 <app-entreprise (counterChange)="monEntreprise = $event"></app-entreprise>
