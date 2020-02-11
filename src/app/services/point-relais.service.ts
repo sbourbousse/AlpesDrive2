@@ -3,55 +3,29 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { User } from "../models/user.model";
 import { catchError, map, tap } from "rxjs/operators";
 import { Observable, of, BehaviorSubject } from "rxjs";
-import { Producteur } from "../models/producteur.model";
+import { Entreprise } from "../models/entreprise.model";
+import { PointRelais } from "../models/pointRelais.model";
+import { PointRelaisType } from "../models/pointRelaisType.model";
 
 @Injectable({
   providedIn: "root"
 })
-export class AuthService {
+export class PointRelaisService {
   constructor(private http: HttpClient) {}
 
-  private isAuthSource = new BehaviorSubject<boolean>(false);
-  isAuth = this.isAuthSource.asObservable();
-  private authUrl: string = "http://sylvain-bourbousse.fr/api/auth.php";
-  private signupProducteurUrl: string =
-    "http://sylvain-bourbousse.fr/api/producteur_add.php";
+  private pointRelaisListUrl: string = "http://sylvain-bourbousse.fr/api/ ";
+  private pointRelaisTypeListUrl: string = "http://sylvain-bourbousse.fr/api/ ";
 
   httpOptions = {
     headers: new HttpHeaders({ "Content-Type": "application/json" })
   };
 
-  signinUser(user: User): Observable<any> {
-    let response = this.http.post(this.authUrl, JSON.stringify(user)).pipe(
-      tap(() => console.log(`Logging user w/ email=${user.email}`)),
-      catchError(this.handleError<User>("signinUser"))
-    );
-
-    return response;
-  }
-
-  signoutUser() {
-    this.setAuthFalse();
-    console.log("Deconnexion");
-  }
-
-  setAuthFalse(): void {
-    this.isAuthSource.next(false);
-  }
-
-  setAuthTrue(): void {
-    this.isAuthSource.next(true);
-  }
-
-  //Inscriptions
-  signupProcteur(unProducteur: Producteur) {
+  getPointRelais() {} //TODO
+  getPointRelaisType() {
+    let pointRelaisTypeList: PointRelaisType[];
     let response = this.http
-      .post(this.signupProducteurUrl, JSON.stringify(unProducteur))
-      .pipe(
-        tap(() => console.log(`Sign up user w/ email=${unProducteur.email}`)),
-        catchError(this.handleError<User>("signupProducteur"))
-      );
-
+      .get(this.pointRelaisTypeListUrl)
+      .pipe(catchError(this.handleError<User>("signupProducteur")));
     return response;
   }
 

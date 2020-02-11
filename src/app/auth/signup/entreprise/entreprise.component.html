@@ -1,0 +1,20 @@
+<form [formGroup]="entrepriseForm">
+  <input
+    (keyup)="sendValue()"
+    type="text"
+    formControlName="id"
+    placeholder="Identifiant de l'entreprise"
+  />
+  <input
+    (keyup)="sendValue()"
+    type="text"
+    formControlName="name"
+    placeholder="Nom de l'entreprise"
+  />
+  <input
+    (keyup)="sendValue()"
+    type="text"
+    formControlName="iBAN"
+    placeholder="IBAN"
+  />
+</form>
