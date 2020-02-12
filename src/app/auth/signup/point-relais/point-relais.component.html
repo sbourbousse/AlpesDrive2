@@ -7,6 +7,7 @@
   <input type="text" placeholder="Ville" formControlName="city" />
   <input type="text" placeholder="Code postale" formControlName="postCode" />
   <select type="text" formControlName="type">
+    <option selected>Choisissez un type</option>
     <option
       *ngFor="let pointRelaisType of tabPointRelaisType"
       [value]="pointRelaisType.id"

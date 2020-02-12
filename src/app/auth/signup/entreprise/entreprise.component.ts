@@ -25,8 +25,18 @@ export class EntrepriseComponent implements OnInit {
   initForm() {
     //TODO validateurs de l'entreprise
     this.entrepriseForm = this.formBuilder.group({
-      id: ["", [Validators.required]],
-      name: ["", [Validators.required]],
+      id: [
+        "",
+        [
+          Validators.required,
+          Validators.minLength(14),
+          Validators.maxLength(14)
+        ]
+      ],
+      name: [
+        "",
+        [Validators.required, Validators.minLength(3), Validators.maxLength(64)]
+      ],
       iBAN: ["", [Validators.minLength(27), Validators.maxLength(34)]]
     });
   }

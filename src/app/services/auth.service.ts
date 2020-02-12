@@ -63,7 +63,7 @@ export class AuthService {
       .post(this.signupPointRelaisUrl, JSON.stringify(unPointRelais))
       .pipe(
         tap(() => console.log(`Sign up user w/ email=${unPointRelais.email}`)),
-        catchError(this.handleError<User>("signupProducteur"))
+        catchError(this.handleError<User>("signupPointRelais"))
       );
 
     return response;
