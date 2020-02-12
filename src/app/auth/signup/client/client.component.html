@@ -1,1 +1,18 @@
-<p>client works!</p>
+<!-- User form -->
+<form [formGroup]="clientForm">
+  <input type="text" placeholder="Nom" formControlName="lastname" />
+  <input type="text" placeholder="Prénom" formControlName="firstname" />
+  <input type="text" placeholder="Téléphone" formControlName="phone" />
+  <input type="text" placeholder="Adresse" formControlName="address" />
+  <input type="text" placeholder="Ville" formControlName="city" />
+  <input type="text" placeholder="Code postale" formControlName="postCode" />
+</form>
+
+<button
+  type="submit"
+  [disabled]="clientForm.invalid || user == null"
+  (click)="submitForm()"
+>
+  Valider
+</button>
+<p>{{ errorMessage }}</p>

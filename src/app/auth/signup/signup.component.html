@@ -36,4 +36,4 @@
   *ngIf="userType == 'producteur'"
   [user]="this.getUser()"
 ></app-producteur>
-<app-client *ngIf="userType == 'client'"></app-client>
+<app-client *ngIf="userType == 'client'" [user]="this.getUser()"></app-client>

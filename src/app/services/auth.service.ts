@@ -5,6 +5,7 @@ import { catchError, map, tap } from "rxjs/operators";
 import { Observable, of, BehaviorSubject } from "rxjs";
 import { Producteur } from "../models/producteur.model";
 import { PointRelais } from "../models/pointRelais.model";
+import { Client } from "../models/client.model";
 
 @Injectable({
   providedIn: "root"
@@ -19,6 +20,8 @@ export class AuthService {
     "http://sylvain-bourbousse.fr/api/producteur_add.php";
   private signupPointRelaisUrl: string =
     "http://sylvain-bourbousse.fr/api/pointRelais_add.php";
+  private signupClientUrl: string =
+    "http://sylvain-bourbousse.fr/api/client_add.php";
 
   httpOptions = {
     headers: new HttpHeaders({ "Content-Type": "application/json" })
@@ -51,7 +54,9 @@ export class AuthService {
     let response = this.http
       .post(this.signupProducteurUrl, JSON.stringify(unProducteur))
       .pipe(
-        tap(() => console.log(`Sign up user w/ email=${unProducteur.email}`)),
+        tap(() =>
+          console.log(`Sign up producteur w/ email=${unProducteur.email}`)
+        ),
         catchError(this.handleError<User>("signupProducteur"))
       );
 
@@ -62,8 +67,21 @@ export class AuthService {
     let response = this.http
       .post(this.signupPointRelaisUrl, JSON.stringify(unPointRelais))
       .pipe(
-        tap(() => console.log(`Sign up user w/ email=${unPointRelais.email}`)),
+        tap(() =>
+          console.log(`Sign up point relais w/ email=${unPointRelais.email}`)
+        ),
         catchError(this.handleError<User>("signupPointRelais"))
+      );
+
+    return response;
+  }
+
+  signupClient(unClient: Client) {
+    let response = this.http
+      .post(this.signupClientUrl, JSON.stringify(unClient))
+      .pipe(
+        tap(() => console.log(`Sign up client w/ email=${unClient.email}`)),
+        catchError(this.handleError<User>("signupClient"))
       );
 
     return response;
