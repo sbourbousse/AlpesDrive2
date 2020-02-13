@@ -11,7 +11,7 @@ import { Producteur } from "src/app/models/producteur.model";
 @Component({
   selector: "app-producteur",
   templateUrl: "./producteur.component.html",
-  styleUrls: ["./producteur.component.css"]
+  styleUrls: ["./producteur.component.scss"]
 })
 export class ProducteurComponent implements OnInit {
   constructor(

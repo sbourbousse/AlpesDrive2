@@ -8,7 +8,7 @@ import { Component, OnInit } from "@angular/core";
       réception.
     </p>
   `,
-  styleUrls: ["./mail.component.css"]
+  styleUrls: ["./mail.component.scss"]
 })
 export class MailComponent implements OnInit {
   constructor() {}

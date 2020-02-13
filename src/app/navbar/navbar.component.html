@@ -1,8 +1,12 @@
-<nav>
-  <button routerLink="/">Accueil</button>
-  <button *ngIf="!isAuth" routerLink="/connexion">
-    Se connecter
-  </button>
-  <button *ngIf="isAuth" (click)="logOut()">Se deconnecter</button>
-  <button routerLink="/inscription">S'inscrire</button>
-</nav>
+<nb-actions size="medium">
+  <nb-action routerLink="/" icon="home-outline"></nb-action>
+
+  <nb-action *ngIf="!isAuth" routerLink="/connexion">
+    Connexion
+  </nb-action>
+  <nb-action *ngIf="isAuth" (click)="logOut()">
+    Deconnexion
+  </nb-action>
+
+  <nb-action icon="person-outline"></nb-action>
+</nb-actions>

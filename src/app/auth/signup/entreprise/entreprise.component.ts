@@ -5,7 +5,7 @@ import { Entreprise } from "src/app/models/entreprise.model";
 @Component({
   selector: "app-entreprise",
   templateUrl: "./entreprise.component.html",
-  styleUrls: ["./entreprise.component.css"]
+  styleUrls: ["./entreprise.component.scss"]
 })
 export class EntrepriseComponent implements OnInit {
   constructor(private formBuilder: FormBuilder) {}

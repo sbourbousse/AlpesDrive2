@@ -9,7 +9,7 @@ import { Client } from "src/app/models/client.model";
 @Component({
   selector: "app-client",
   templateUrl: "./client.component.html",
-  styleUrls: ["./client.component.css"]
+  styleUrls: ["./client.component.scss"]
 })
 export class ClientComponent implements OnInit {
   constructor(

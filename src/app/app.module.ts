@@ -2,6 +2,20 @@ import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
+import {
+  NbIconModule,
+  NbUserModule,
+  NbButtonModule,
+  NbBadgeModule,
+  NbThemeModule,
+  NbSelectModule,
+  NbCardModule,
+  NbLayoutModule,
+  NbContextMenuModule,
+  NbActionsModule,
+  NbDialogModule,
+  NbMenuModule
+} from "@nebular/theme";
 
 import { AppComponent } from "./app.component";
 import { NavbarComponent } from "./navbar/navbar.component";
@@ -15,6 +29,8 @@ import { ClientComponent } from "./auth/signup/client/client.component";
 import { FourOhFourComponent } from "./four-oh-four/four-oh-four.component";
 import { EntrepriseComponent } from "./auth/signup/entreprise/entreprise.component";
 import { MailComponent } from "./auth/signup/mail/mail.component";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { NbEvaIconsModule } from "@nebular/eva-icons";
 
 const appRoutes: Routes = [
   { path: "accueil", component: HomeComponent },
@@ -46,7 +62,14 @@ const appRoutes: Routes = [
     BrowserModule,
     RouterModule.forRoot(appRoutes),
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NbThemeModule.forRoot(),
+    BrowserAnimationsModule,
+    NbThemeModule.forRoot({ name: "default" }),
+    NbLayoutModule,
+    NbActionsModule,
+    NbMenuModule.forRoot(),
+    NbEvaIconsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
