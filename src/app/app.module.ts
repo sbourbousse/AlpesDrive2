@@ -14,7 +14,14 @@ import {
   NbContextMenuModule,
   NbActionsModule,
   NbDialogModule,
-  NbMenuModule
+  NbMenuModule,
+  NbChatModule,
+  NbDatepickerModule,
+  NbSidebarModule,
+  NbToastrModule,
+  NbWindowModule,
+  NbStepperModule,
+  NbInputModule
 } from "@nebular/theme";
 
 import { AppComponent } from "./app.component";
@@ -31,6 +38,7 @@ import { EntrepriseComponent } from "./auth/signup/entreprise/entreprise.compone
 import { MailComponent } from "./auth/signup/mail/mail.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NbEvaIconsModule } from "@nebular/eva-icons";
+import { HeaderComponent } from "./header/header.component";
 
 const appRoutes: Routes = [
   { path: "accueil", component: HomeComponent },
@@ -56,7 +64,8 @@ const appRoutes: Routes = [
     ClientComponent,
     FourOhFourComponent,
     EntrepriseComponent,
-    MailComponent
+    MailComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -68,8 +77,14 @@ const appRoutes: Routes = [
     NbThemeModule.forRoot({ name: "default" }),
     NbLayoutModule,
     NbActionsModule,
+    NbCardModule,
+    NbButtonModule,
     NbMenuModule.forRoot(),
-    NbEvaIconsModule
+    NbEvaIconsModule,
+    NbSidebarModule.forRoot(),
+    NbStepperModule,
+    NbInputModule,
+    NbSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

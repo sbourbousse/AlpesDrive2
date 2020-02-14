@@ -15,6 +15,7 @@ export class AuthService {
 
   private isAuthSource = new BehaviorSubject<boolean>(false);
   isAuth = this.isAuthSource.asObservable();
+
   private authUrl: string = "http://sylvain-bourbousse.fr/api/auth.php";
   private signupProducteurUrl: string =
     "http://sylvain-bourbousse.fr/api/producteur_add.php";
@@ -47,6 +48,10 @@ export class AuthService {
 
   setAuthTrue(): void {
     this.isAuthSource.next(true);
+  }
+
+  updateUser() {
+    this.setAuthTrue();
   }
 
   //Inscriptions

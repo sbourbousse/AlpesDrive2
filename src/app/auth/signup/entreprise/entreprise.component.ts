@@ -12,6 +12,9 @@ export class EntrepriseComponent implements OnInit {
 
   entrepriseForm: FormGroup;
   @Output() counterChange = new EventEmitter<Entreprise>();
+  id;
+  name;
+  iBAN;
 
   ngOnInit() {
     this.initForm();
@@ -39,6 +42,9 @@ export class EntrepriseComponent implements OnInit {
       ],
       iBAN: ["", [Validators.minLength(27), Validators.maxLength(34)]]
     });
+    this.id = this.entrepriseForm.get("id");
+    this.name = this.entrepriseForm.get("name");
+    this.iBAN = this.entrepriseForm.get("iBAN");
   }
 
   // Renvoie null si le formulaire n'est pas correctement remplie

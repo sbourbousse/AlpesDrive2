@@ -34,6 +34,12 @@ export class ProducteurComponent implements OnInit {
   errorMessage: string;
   userType: string;
   monEntreprise: Entreprise;
+  lastname;
+  firstname;
+  phone;
+  address;
+  city;
+  postCode;
 
   initForm() {
     this.producteurForm = this.formBuilder.group({
@@ -66,6 +72,12 @@ export class ProducteurComponent implements OnInit {
         [Validators.required, Validators.minLength(5), Validators.maxLength(5)]
       ]
     });
+    this.lastname = this.producteurForm.get("lastname");
+    this.firstname = this.producteurForm.get("firstname");
+    this.phone = this.producteurForm.get("phone");
+    this.address = this.producteurForm.get("address");
+    this.city = this.producteurForm.get("city");
+    this.postCode = this.producteurForm.get("postCode");
   }
 
   getProducteur(): Producteur {
@@ -101,11 +113,10 @@ export class ProducteurComponent implements OnInit {
       this.authService.signupProcteur(this.getProducteur()).subscribe(
         res => {
           if (res["new"]["status"] == true) {
-            this.route.navigate(["/inscription/mail"]);
-            console.log(res);
+            console.log(res); //debogage
           } else {
             this.errorMessage = res["new"]["message"];
-            console.log(res);
+            console.log(res); //debogage
           }
         },
         error => {

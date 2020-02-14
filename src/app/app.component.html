@@ -1,8 +1,10 @@
 <nb-layout>
   <nb-layout-header>
-    <app-navbar></app-navbar>
+    <app-header></app-header>
   </nb-layout-header>
-
+  <nb-sidebar *ngIf="isAuth" responsive="true"
+    ><app-navbar></app-navbar
+  ></nb-sidebar>
   <nb-layout-column>
     <div>
       <router-outlet></router-outlet>

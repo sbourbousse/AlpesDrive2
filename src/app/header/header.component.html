@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="row">
+    <div class="col-2 align-self-center">
+      Alpes Drive
+    </div>
+    <div class="col-10 align-self-end">
+      <nb-actions size="medium">
+        <nb-action routerLink="/" icon="home-outline"></nb-action>
+
+        <nb-action
+          *ngIf="!isAuth"
+          routerLink="/connexion"
+          icon="log-in-outline"
+        >
+        </nb-action>
+        <nb-action *ngIf="isAuth" (click)="logOut()" icon="log-out-outline">
+        </nb-action>
+
+        <nb-action icon="checkmark-outline"> </nb-action>
+      </nb-actions>
+    </div>
+  </div>
+</div>

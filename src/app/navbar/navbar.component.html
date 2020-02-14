@@ -1,12 +1,1 @@
-<nb-actions size="medium">
-  <nb-action routerLink="/" icon="home-outline"></nb-action>
-
-  <nb-action *ngIf="!isAuth" routerLink="/connexion">
-    Connexion
-  </nb-action>
-  <nb-action *ngIf="isAuth" (click)="logOut()">
-    Deconnexion
-  </nb-action>
-
-  <nb-action icon="person-outline"></nb-action>
-</nb-actions>
+<nb-menu [items]="items"> </nb-menu>

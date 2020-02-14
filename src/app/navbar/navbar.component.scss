@@ -1,3 +1,12 @@
 :host nb-layout-header ::ng-deep nav {
   justify-content: flex-end;
 }
+
+nav app-navbar nb-menu .menu-items {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+}

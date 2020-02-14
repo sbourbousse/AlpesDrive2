@@ -1,21 +1,120 @@
-<!-- User form -->
 <form [formGroup]="producteurForm">
-  <input type="text" placeholder="Nom" formControlName="lastname" />
-  <input type="text" placeholder="Prénom" formControlName="firstname" />
-  <input type="text" placeholder="Téléphone" formControlName="phone" />
-  <span *ngIf="producteurForm.get('phone').valid">phonenumber correct</span>
-  <input type="text" placeholder="Adresse" formControlName="address" />
-  <input type="text" placeholder="Ville" formControlName="city" />
-  <input type="text" placeholder="Code postale" formControlName="postCode" />
+  <nb-card>
+    <nb-card-body>
+      <div class="container">
+        <nb-stepper #stepper linear="true" disableStepNavigation="true">
+          <!-- Nom, prenom et téléphone -->
+          <nb-step label="Informations">
+            <div class="row mb-3">
+              <input
+                nbInput
+                type="text"
+                placeholder="Nom"
+                formControlName="lastname"
+                [status]="lastname.invalid ? 'basic' : 'success'"
+                class="col-4"
+              />
+              <input
+                nbInput
+                type="text"
+                placeholder="Prénom"
+                formControlName="firstname"
+                [status]="firstname.invalid ? 'basic' : 'success'"
+                class="col-4"
+              />
+              <input
+                nbInput
+                type="text"
+                placeholder="Téléphone"
+                formControlName="phone"
+                maxlength="10"
+                [status]="phone.invalid ? 'basic' : 'success'"
+                class="col-4"
+              />
+            </div>
+            <div class="row justify-content-center">
+              <button
+                nbButton
+                nbStepperNext
+                [disabled]="
+                  firstname.invalid || lastname.invalid || phone.invalid
+                "
+              >
+                next
+              </button>
+            </div>
+          </nb-step>
+
+          <!-- Adresse, ville et code postal -->
+          <nb-step label="Adresse">
+            <div class="row mb-3">
+              <input
+                nbInput
+                type="text"
+                placeholder="Adresse"
+                formControlName="address"
+                [status]="address.invalid ? 'basic' : 'success'"
+                class="col-4"
+              />
+              <input
+                nbInput
+                type="text"
+                placeholder="Ville"
+                formControlName="city"
+                [status]="city.invalid ? 'basic' : 'success'"
+                class="col-4"
+              />
+              <input
+                nbInput
+                type="text"
+                placeholder="Code postal"
+                formControlName="postCode"
+                maxlength="5"
+                [status]="postCode.invalid ? 'basic' : 'success'"
+                class="col-4"
+              />
+            </div>
+            <div class="row justify-content-center">
+              <button
+                nbButton
+                nbStepperNext
+                [disabled]="address.invalid || city.invalid || postCode.invalid"
+              >
+                next
+              </button>
+            </div>
+          </nb-step>
+
+          <!-- Entreprise -->
+          <nb-step label="Entreprise">
+            <app-entreprise
+              (counterChange)="monEntreprise = $event"
+            ></app-entreprise>
+            <div class="row justify-content-center">
+              <button
+                nbButton
+                nbStepperNext
+                type="submit"
+                [disabled]="
+                  producteurForm.invalid ||
+                  monEntreprise == null ||
+                  user == null
+                "
+                (click)="submitForm()"
+              >
+                Valider
+              </button>
+            </div>
+          </nb-step>
+
+          <nb-step [hidden]="true">
+            <div class="step-container">
+              <app-mail></app-mail>
+            </div>
+          </nb-step>
+        </nb-stepper>
+      </div>
+      <p>{{ errorMessage }}</p>
+    </nb-card-body>
+  </nb-card>
 </form>
-
-<app-entreprise (counterChange)="monEntreprise = $event"></app-entreprise>
-
-<button
-  type="submit"
-  [disabled]="producteurForm.invalid || monEntreprise == null || user == null"
-  (click)="submitForm()"
->
-  Valider
-</button>
-<p>{{ errorMessage }}</p>

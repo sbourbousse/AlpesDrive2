@@ -23,6 +23,7 @@ export class SigninComponent implements OnInit {
 
   //Variables
   signinForm: FormGroup;
+  error = false;
   errorMessage: string;
   private isAuth: boolean;
 
@@ -47,7 +48,7 @@ export class SigninComponent implements OnInit {
         res => {
           console.log(res.auth.message);
           if (res.auth.status == true) {
-            this.authService.setAuthTrue();
+            this.authService.updateUser();
             this.route.navigate(["/"]);
           } else {
             this.errorMessage = res.auth.message;

@@ -3,10 +3,10 @@ import { Component, OnInit } from "@angular/core";
 @Component({
   selector: "app-mail",
   template: `
-    <p>
-      Un mail de vérification vous a été envoyé. Vérifiez votre boite de
-      réception.
-    </p>
+    <h3>
+      Votre inscription est términée!<br />Activez votre compte en cliquant sur
+      le lien d'activation reçu sur votre boite mail
+    </h3>
   `,
   styleUrls: ["./mail.component.scss"]
 })

@@ -1,8 +1,43 @@
-<form [formGroup]="signinForm" (ngSubmit)="onSubmit()">
-  <label for="email"></label>
-  <input type="text" id="email" formControlName="email" />
-  <label for="password"></label>
-  <input type="password" id="password" formControlName="password" />
-  <button type="submit" [disabled]="signinForm.invalid">Se connecter</button>
-</form>
-<p>{{ errorMessage }}</p>
+<!-- User form -->
+<nb-card>
+  <nb-card-body>
+    <form [formGroup]="signinForm">
+      <div class="row justify-content-center">
+        <div class="col-8 authentification-user">
+          <label for="signin-email">Votre email :</label>
+          <input
+            nbInput
+            type="text"
+            placeholder="Email"
+            id="signup-email"
+            formControlName="email"
+          />
+
+          <label class="mt-3" for="signin-password">Votre mot de passe :</label>
+          <input
+            nbInput
+            type="password"
+            placeholder="Mot de passe"
+            id="signin-password"
+            formControlName="password"
+          />
+          <button
+            nbButton
+            shape="round"
+            hero
+            status="success"
+            class="mt-3"
+            type="submit"
+            [disabled]="signinForm.invalid"
+            (click)="onSubmit()"
+          >
+            Se connecter
+          </button>
+        </div>
+      </div>
+    </form>
+    <p class="text-center text-warning mt-3 ">
+      {{ errorMessage }}
+    </p>
+  </nb-card-body>
+</nb-card>

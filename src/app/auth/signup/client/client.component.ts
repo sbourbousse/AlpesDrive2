@@ -27,6 +27,12 @@ export class ClientComponent implements OnInit {
   clientForm: FormGroup;
   errorMessage: string;
   userType: string;
+  lastname;
+  firstname;
+  phone;
+  address;
+  city;
+  postCode;
 
   initForm() {
     this.clientForm = this.formBuilder.group({
@@ -59,6 +65,12 @@ export class ClientComponent implements OnInit {
         [Validators.required, Validators.minLength(5), Validators.maxLength(5)]
       ]
     });
+    this.lastname = this.clientForm.get("lastname");
+    this.firstname = this.clientForm.get("firstname");
+    this.phone = this.clientForm.get("phone");
+    this.address = this.clientForm.get("address");
+    this.city = this.clientForm.get("city");
+    this.postCode = this.clientForm.get("postCode");
   }
 
   getClient(): Client {

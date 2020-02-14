@@ -1,10 +1,15 @@
-import { Component, OnInit, NgModule } from "@angular/core";
+import {
+  Component,
+  ChangeDetectionStrategy,
+  OnInit,
+  NgModule
+} from "@angular/core";
 import { AuthService } from "../services/auth.service";
-import { BehaviorSubject } from "rxjs";
-import { NbIconConfig, NbContextMenuModule } from "@nebular/theme";
+import { NbContextMenuModule } from "@nebular/theme";
 
 @Component({
   selector: "app-navbar",
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: "./navbar.component.html",
   styleUrls: ["./navbar.component.scss"]
 })
@@ -14,13 +19,25 @@ import { NbIconConfig, NbContextMenuModule } from "@nebular/theme";
 export class NavbarComponent implements OnInit {
   constructor(private authService: AuthService) {}
   isAuth: boolean;
-  items = [{ title: "Profile" }, { title: "Log out" }];
+  items = [
+    {
+      title: "Mon panier",
+      icon: "shopping-cart-outline",
+      link: ["/"]
+    },
+    {
+      title: "Mon Compte",
+      icon: "person-outline",
+      link: ["/"]
+    },
+    {
+      title: "Change Password",
+      icon: "lock-outline",
+      link: ["/"]
+    }
+  ];
 
   ngOnInit() {
     this.authService.isAuth.subscribe(isAuth => (this.isAuth = isAuth));
-  }
-
-  logOut() {
-    this.authService.signoutUser();
   }
 }

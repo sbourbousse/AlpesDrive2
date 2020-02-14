@@ -39,6 +39,13 @@ export class PointRelaisComponent implements OnInit {
   userType: string;
   monEntreprise: Entreprise;
   tabPointRelaisType: PointRelaisType[];
+  lastname;
+  firstname;
+  phone;
+  address;
+  city;
+  postCode;
+  type;
 
   initForm() {
     this.pointRelaisForm = this.formBuilder.group({
@@ -72,6 +79,13 @@ export class PointRelaisComponent implements OnInit {
       ],
       type: ["", [Validators.required]]
     });
+    this.lastname = this.pointRelaisForm.get("lastname");
+    this.firstname = this.pointRelaisForm.get("firstname");
+    this.phone = this.pointRelaisForm.get("phone");
+    this.address = this.pointRelaisForm.get("address");
+    this.city = this.pointRelaisForm.get("city");
+    this.postCode = this.pointRelaisForm.get("postCode");
+    this.type = this.pointRelaisForm.get("type");
   }
 
   getPointRelaisType() {
