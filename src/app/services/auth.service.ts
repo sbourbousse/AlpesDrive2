@@ -15,6 +15,12 @@ export class AuthService {
 
   private isAuthSource = new BehaviorSubject<boolean>(false);
   isAuth = this.isAuthSource.asObservable();
+  userType;
+  contextId;
+  utilisateurId;
+  prenom;
+  nom;
+  pointRelaisList;
 
   private authUrl: string = "http://sylvain-bourbousse.fr/api/auth.php";
   private signupProducteurUrl: string =
@@ -50,7 +56,25 @@ export class AuthService {
     this.isAuthSource.next(true);
   }
 
-  updateUser() {
+  updateUser(data) {
+    this.userType = data["userType"];
+    this.utilisateurId= data["utilisateurId"];
+    if (this.userType == "client"){
+      this.prenom= data["clientPrenom"];
+      this.nom= data["clientNom"];
+      this.contextId= data["clientId"];
+    } else if (this.userType == "producteur") {
+      this.prenom= data["prodPrenom"];
+      this.nom= data["prodNom"];
+      this.contextId= data["prodId"];
+      this.pointRelaisList= data["pointRelais"];
+    } else if (this.userType == "point_relais") {
+      this.prenom= data["pointRelaisPrenomGerant"];
+      this.nom= data["pointRelaisNomGerant"];
+      this.contextId= data["pointRelaisId"];
+      this.pointRelaisList= data["pointRelais"];
+    }
+    console.log(data);
     this.setAuthTrue();
   }
 
