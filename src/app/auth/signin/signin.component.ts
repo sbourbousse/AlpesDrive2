@@ -48,7 +48,7 @@ export class SigninComponent implements OnInit {
         res => {
           console.log(res.auth.message);
           if (res.auth.status == true) {
-            this.authService.updateUser();
+            this.authService.updateUser(res["data"]);
             this.route.navigate(["/"]);
           } else {
             this.errorMessage = res.auth.message;

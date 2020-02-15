@@ -5,12 +5,7 @@
   <nb-sidebar *ngIf="isAuth" responsive="true"
     ><app-navbar></app-navbar
   ></nb-sidebar>
-  <nb-layout-column>
-    <div>
-      <router-outlet></router-outlet>
-    </div>
-  </nb-layout-column>
-
+    <nb-layout-column><router-outlet></router-outlet></nb-layout-column>
   <nb-layout-footer fixed>
     <!-- Insert footer here -->
   </nb-layout-footer>

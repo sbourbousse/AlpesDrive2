@@ -1,0 +1,15 @@
+.header-content{
+    display: flex;
+    .header-col-logo{
+        width: 20%;
+        min-width: 207px;
+        .header-logo{
+            max-height: 76px;
+            min-width: 20%
+        }
+    }
+    .header-col-main{
+        width: 80%;
+    }
+}
+

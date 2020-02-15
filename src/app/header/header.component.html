@@ -1,11 +1,11 @@
-<div class="container">
-  <div class="row">
-    <div class="col-2 align-self-center">
-      Alpes Drive
+  <div class="header-content">
+    <div class="header-col-logo align-self-center mr-2">
+      <img class="header-logo img-fluid" src="../../assets/alpes-drive-small-logo.png"/>
     </div>
-    <div class="col-10 align-self-end">
-      <nb-actions size="medium">
+    <div class="header-main align-self-center">
+      <nb-actions size="medium" >
         <nb-action routerLink="/" icon="home-outline"></nb-action>
+        <nb-action routerLink="/produits" icon="shopping-bag-outline"></nb-action>
 
         <nb-action
           *ngIf="!isAuth"
@@ -20,4 +20,3 @@
       </nb-actions>
     </div>
   </div>
-</div>
