@@ -13,7 +13,7 @@ import { PointRelaisType } from "../models/pointRelaisType.model";
 export class PointRelaisService {
   constructor(private http: HttpClient) {}
 
-  private pointRelaisListUrl: string = "http://sylvain-bourbousse.fr/api/ ";
+  private pointRelaisListUrl: string = "http://sylvain-bourbousse.fr/api/pointRelais_list.php";
   private pointRelaisTypeListUrl: string =
     "http://sylvain-bourbousse.fr/api/pointRelaisType_list.php ";
 
@@ -21,11 +21,24 @@ export class PointRelaisService {
     headers: new HttpHeaders({ "Content-Type": "application/json" })
   };
 
-  getPointRelais() {} //TODO
+  getAllPointRelais() {
+    let response = this.http
+      .get(this.pointRelaisListUrl)
+      .pipe(catchError(this.handleError<User>("getPointRelais")));
+    return response;
+  } //TODO
+
+  getPointRelais(id, userType) {
+    let response = this.http
+      .get(this.pointRelaisListUrl+"?userType="+userType+"&id="+id, this.httpOptions)
+      .pipe(catchError(this.handleError<User>("getPointRelais")));
+    return response;
+  } //TODO
+
   getPointRelaisType() {
     let response = this.http
       .get(this.pointRelaisTypeListUrl)
-      .pipe(catchError(this.handleError<User>("signupProducteur")));
+      .pipe(catchError(this.handleError<User>("getPointRelaisType")));
     return response;
   }
 

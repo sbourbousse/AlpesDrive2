@@ -39,6 +39,7 @@ import { MailComponent } from "./auth/signup/mail/mail.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NbEvaIconsModule } from "@nebular/eva-icons";
 import { HeaderComponent } from "./header/header.component";
+import { PointRelaisListComponent } from './producteur/point-relais-list/point-relais-list.component';
 
 const appRoutes: Routes = [
   { path: "accueil", component: HomeComponent },
@@ -48,6 +49,7 @@ const appRoutes: Routes = [
   { path: "inscription/point-relais", component: PointRelaisComponent },
   { path: "inscription/client", component: ClientComponent },
   { path: "inscription/mail", component: MailComponent },
+  { path: "producteur/mes-points-relais", component: PointRelaisListComponent },
   { path: "", redirectTo: "/accueil", pathMatch: "full" },
   { path: "**", component: FourOhFourComponent }
 ];
@@ -65,7 +67,8 @@ const appRoutes: Routes = [
     FourOhFourComponent,
     EntrepriseComponent,
     MailComponent,
-    HeaderComponent
+    HeaderComponent,
+    PointRelaisListComponent
   ],
   imports: [
     BrowserModule,
@@ -84,7 +87,9 @@ const appRoutes: Routes = [
     NbSidebarModule.forRoot(),
     NbStepperModule,
     NbInputModule,
-    NbSelectModule
+    NbSelectModule,
+    NbContextMenuModule,
+    NbIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,16 @@
+<p *ngIf="!complete" class="text-center">Chargement en cours ...</p>
+<p *ngIf="complete && pointRelaisListe == null" class="text-center">Aucun point-relais ...</p>
+<nb-card *ngFor="let pointRelais of pointRelaisListe">
+    <nb-card-header>{{ pointRelais.libelle }}</nb-card-header>
+    <nb-card-body>
+        <div class="media">
+            <img class="align-self-center mr-3" src="../../../assets/shop.svg" alt="Generic placeholder image">
+            <div class="media-body">
+            <h5 class="mt-0">{{ pointRelais.ville }} - {{ pointRelais.typeLibelle }}</h5>
+            <p>Adresse : {{ pointRelais.adresse }}, {{ pointRelais.codePostal }}, {{ pointRelais.ville }}</p>
+            <button nbButton ghost status="info"><nb-icon icon="cube-outline"></nb-icon>Commandes</button>
+            <button nbButton ghost status="success"><nb-icon icon="phone-call-outline"></nb-icon>Contacter</button>
+            </div>
+        </div>
+    </nb-card-body>
+</nb-card>
