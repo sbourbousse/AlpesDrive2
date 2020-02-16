@@ -2,10 +2,13 @@ import {
   Component,
   ChangeDetectionStrategy,
   OnInit,
-  NgModule
+  NgModule,
+  Inject
 } from "@angular/core";
 import { AuthService } from "../services/auth.service";
 import { NbContextMenuModule } from "@nebular/theme";
+import { NB_WINDOW, NbMenuService } from '@nebular/theme';
+import { filter, map } from 'rxjs/operators';
 
 @Component({
   selector: "app-navbar",
@@ -17,9 +20,13 @@ import { NbContextMenuModule } from "@nebular/theme";
   imports: [NbContextMenuModule]
 })
 export class NavbarComponent implements OnInit {
-  constructor(private authService: AuthService) {}
+  constructor(private nbMenuService: NbMenuService, @Inject(NB_WINDOW) private window, private authService: AuthService) {}
   isAuth: boolean;
   items = [];
+  contextItems = [
+    { title: 'Profile' },
+    { title: 'Logout' },
+  ];
 
   ngOnInit() {
     this.authService.isAuth.subscribe(isAuth => (this.isAuth = isAuth));
@@ -43,7 +50,7 @@ export class NavbarComponent implements OnInit {
               {
                 title: "Mes points relais",
                 icon: "home-outline",
-                link: ["/"]
+                link: ["/producteur/mes-points-relais"]
               },
               {
                 title: "Mes informations",
@@ -108,5 +115,13 @@ export class NavbarComponent implements OnInit {
         ];
       }
     }
+
+    this.nbMenuService.onItemClick()
+      .pipe(
+        filter(({ tag }) => tag === 'my-context-menu'),
+        map(({ item: { title } }) => title),
+      )
+      .subscribe(title => this.window.alert(`${title} was clicked!`));
+  
   }
 }
