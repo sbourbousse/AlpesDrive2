@@ -40,6 +40,8 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NbEvaIconsModule } from "@nebular/eva-icons";
 import { HeaderComponent } from "./header/header.component";
 import { PointRelaisListComponent } from './producteur/point-relais-list/point-relais-list.component';
+import { ProduitAddComponent } from './producteur/produit-add/produit-add.component';
+import { CategorieChooseComponent } from './producteur/categorie-choose/categorie-choose.component';
 
 const appRoutes: Routes = [
   { path: "accueil", component: HomeComponent },
@@ -50,6 +52,7 @@ const appRoutes: Routes = [
   { path: "inscription/client", component: ClientComponent },
   { path: "inscription/mail", component: MailComponent },
   { path: "producteur/mes-points-relais", component: PointRelaisListComponent },
+  { path: "producteur/ajouter-un-produit", component: ProduitAddComponent },
   { path: "", redirectTo: "/accueil", pathMatch: "full" },
   { path: "**", component: FourOhFourComponent }
 ];
@@ -68,7 +71,9 @@ const appRoutes: Routes = [
     EntrepriseComponent,
     MailComponent,
     HeaderComponent,
-    PointRelaisListComponent
+    PointRelaisListComponent,
+    ProduitAddComponent,
+    CategorieChooseComponent
   ],
   imports: [
     BrowserModule,
@@ -89,9 +94,14 @@ const appRoutes: Routes = [
     NbInputModule,
     NbSelectModule,
     NbContextMenuModule,
-    NbIconModule
+    NbIconModule,
+    NbDialogModule.forRoot(),
+    NbDatepickerModule.forRoot()
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    CategorieChooseComponent
+  ]
 })
 export class AppModule {}

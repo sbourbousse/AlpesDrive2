@@ -1,0 +1,25 @@
+<nb-card>
+    <nb-card-header>
+        <h2>Ajout de produit</h2>
+    </nb-card-header>
+    <nb-stepper #stepper linear="true" disableStepNavigation="true">
+        <!-- Choisir sa catégorie -->
+        <nb-step label="Catégorie">
+            <app-categorie-choose (chosenCategorieIdChange)="categorieId = $event"></app-categorie-choose>
+        </nb-step>
+        <!-- Choisir sa catégorie -->
+        <nb-step>
+
+        </nb-step>
+        <!-- Choisir sa variété -->
+        <nb-step>
+
+        </nb-step>
+        <!-- Prix, quantité, unité, date de péremption -->
+        <nb-step>
+
+        </nb-step>
+
+    </nb-stepper>
+
+</nb-card>
