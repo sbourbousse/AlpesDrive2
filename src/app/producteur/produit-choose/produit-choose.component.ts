@@ -16,14 +16,14 @@ export class ProduitChooseComponent implements OnInit {
 
   ngOnInit() {
     if(this.categorieId != null)
-    this.getCategories();
+    this.getProduits();
   }
 
   choose(id) {
     this.chosenProduitIdChange.next(id);
   }
 
-  getCategories() {
+  getProduits() {
     this.producteurService.getProduit(this.categorieId).subscribe(
       res => {
         if (res != null) {
