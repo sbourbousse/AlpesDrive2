@@ -1,19 +1,56 @@
 <nb-card>
     <nb-card-header>
         <h2>Ajout de produit</h2>
+        <button (click)="test()"></button>
     </nb-card-header>
     <nb-stepper #stepper linear="true" disableStepNavigation="true">
         <!-- Choisir sa catégorie -->
         <nb-step label="Catégorie">
-            <app-categorie-choose (chosenCategorieIdChange)="categorieId = $event"></app-categorie-choose>
+            <app-categorie-choose (chosenCategorieIdChange)="categorieId = $event">
+            </app-categorie-choose>
+            <button
+                nbButton
+                nbStepperNext
+                [disabled]="
+                  categorieId == null
+                "
+              >
+                Suivant
+            </button>
         </nb-step>
         <!-- Choisir sa catégorie -->
         <nb-step>
-
+            <app-produit-choose 
+            *ngIf="categorieId != null"
+            [categorieId]="categorieId"
+            (chosenProduitIdChange)="produitId = $event">
+            </app-produit-choose>
+            <button
+                nbButton
+                nbStepperNext
+                [disabled]="
+                  categorieId == null || produitId == null
+                "
+              >
+                Suivant
+            </button>
         </nb-step>
         <!-- Choisir sa variété -->
         <nb-step>
-
+            <app-variete-choose 
+            *ngIf="categorieId != null && produitId != null"
+            [produitId]="produitId"
+            (chosenVarieteIdChange)="varieteId = $event">
+            </app-variete-choose>
+            <button
+                nbButton
+                nbStepperNext
+                [disabled]="
+                  categorieId == null || produitId == null || varieteId == null
+                "
+              >
+                Suivant
+            </button>
         </nb-step>
         <!-- Prix, quantité, unité, date de péremption -->
         <nb-step>

@@ -1,7 +1,8 @@
 import { Component, OnInit, NgModule } from '@angular/core';
 import { NbDialogService } from '@nebular/theme';
-import { FourOhFourComponent } from '../../four-oh-four/four-oh-four.component';
 import { CategorieChooseComponent } from '../categorie-choose/categorie-choose.component';
+import { ProduitChooseComponent } from '../produit-choose/produit-choose.component';
+import { VarieteChooseComponent } from '../variete-choose/variete-choose.component';
 
 
 @Component({
@@ -23,5 +24,7 @@ export class ProduitAddComponent implements OnInit {
 
   test() {
     console.log(this.categorieId);
+    console.log(this.produitId);
+
   }
 }

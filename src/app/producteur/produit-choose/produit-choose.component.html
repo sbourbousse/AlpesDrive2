@@ -1,0 +1,7 @@
+<div class="item-choice-container">
+    <div class="item-choice-single" 
+        *ngFor="let produit of produitList"
+        (click)="choose(produit.id)">
+        <h2>{{ produit.libelle }}</h2>
+    </div>
+</div>
