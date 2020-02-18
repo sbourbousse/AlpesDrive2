@@ -9,7 +9,7 @@ import { Variete } from '../../models/variete.model';
 export class VarieteChooseComponent implements OnInit {
 
   constructor(private producteurService: ProducteurService) { }
-  @Output() chosenVarieteIdChange = new EventEmitter<number>();
+  @Output() chosenVarieteChange = new EventEmitter<Variete>();
   varieteList : Variete[] = [];
   @Input() produitId;
 
@@ -18,8 +18,8 @@ export class VarieteChooseComponent implements OnInit {
     this.getVarietes();
   }
 
-  choose(id) {
-    this.chosenVarieteIdChange.next(id);
+  choose(variete: Variete) {
+    this.chosenVarieteChange.next(variete);
   }
 
   getVarietes() {

@@ -18,8 +18,8 @@ export class AuthService {
   userType;
   contextId;
   utilisateurId;
-  prenom;
-  nom;
+  public prenom;
+  public nom;
   pointRelaisList;
 
   private authUrl: string = "http://sylvain-bourbousse.fr/api/auth.php";

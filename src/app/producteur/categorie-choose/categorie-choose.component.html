@@ -1,7 +1,7 @@
 <div class="item-choice-container">
     <div class="item-choice-single" 
         *ngFor="let categorie of categorieList"
-        (click)="choose(categorie.id)">
+        (click)="choose(categorie)">
         <h2>{{ categorie.libelle }}</h2>
     </div>
 </div>

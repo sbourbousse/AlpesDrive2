@@ -4,6 +4,8 @@ import { User } from "../models/user.model";
 import { catchError, map, tap } from "rxjs/operators";
 import { Observable, of, BehaviorSubject } from "rxjs";
 import { Categorie } from "../models/categorie.model";
+import { Vente } from 'src/app/models/vente.model';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +17,7 @@ export class ProducteurService {
   private categorieListUrl: string = "http://sylvain-bourbousse.fr/api/categorie_list.php";
   private produitListUrl: string = "http://sylvain-bourbousse.fr/api/produit_list.php";
   private varieteListUrl: string = "http://sylvain-bourbousse.fr/api/variete_list.php";
+  private venteAddUrl: string = "http://sylvain-bourbousse.fr/api/vente_add.php";
 
 
   
@@ -40,6 +43,19 @@ export class ProducteurService {
     let response = this.http
       .get(this.varieteListUrl+"?proId="+unIdProduit)
       .pipe(catchError(this.handleError<User>("getVariete")));
+    return response;
+  }
+
+  createNewVente(uneVente: Vente) {
+    let response = this.http
+      .post(this.venteAddUrl, JSON.stringify(uneVente))
+      .pipe(
+        tap(() =>
+          console.log(`ajout de produit`)
+        ),
+        catchError(this.handleError<User>("createNewVente"))
+      );
+
     return response;
   }
 

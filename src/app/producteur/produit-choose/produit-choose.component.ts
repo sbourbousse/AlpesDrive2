@@ -1,6 +1,7 @@
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { ProducteurService } from '../../services/producteur.service';
 import { Produit } from '../../models/produit.model';
+import { Unite } from '../../models/unite.model';
 
 @Component({
   selector: 'app-produit-choose',
@@ -10,7 +11,7 @@ import { Produit } from '../../models/produit.model';
 export class ProduitChooseComponent implements OnInit {
 
   constructor(private producteurService: ProducteurService) { }
-  @Output() chosenProduitIdChange = new EventEmitter<number>();
+  @Output() chosenProduitChange = new EventEmitter<Produit>();
   produitList : Produit[] = [];
   @Input() categorieId;
 
@@ -19,8 +20,8 @@ export class ProduitChooseComponent implements OnInit {
     this.getProduits();
   }
 
-  choose(id) {
-    this.chosenProduitIdChange.next(id);
+  choose(produit: Produit) {
+    this.chosenProduitChange.next(produit);
   }
 
   getProduits() {
@@ -33,7 +34,13 @@ export class ProduitChooseComponent implements OnInit {
               new Produit(
                 res["data"][i]["produitId"],
                 res["data"][i]["produitLibelle"],
-                res["data"][i]["produitImage"]
+                res["data"][i]["produitImage"],
+                new Unite(
+                  res["data"][i]["uniteId"],
+                  res["data"][i]["uniteLibelle"],
+                  res["data"][i]["uniteLettre"],
+                  res["data"][i]["uniteQuantiteVente"]
+                  )
               )
             );
           }

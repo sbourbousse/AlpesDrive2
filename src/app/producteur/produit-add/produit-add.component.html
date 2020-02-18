@@ -1,62 +1,118 @@
 <nb-card>
-    <nb-card-header>
-        <h2>Ajout de produit</h2>
-        <button (click)="test()"></button>
-    </nb-card-header>
+  <nb-card-header>
+      <h2>Ajout de produit</h2>
+  </nb-card-header>
+  <nb-card-body>
     <nb-stepper #stepper linear="true" disableStepNavigation="true">
         <!-- Choisir sa catégorie -->
         <nb-step label="Catégorie">
-            <app-categorie-choose (chosenCategorieIdChange)="categorieId = $event">
+            <app-categorie-choose (chosenCategorieChange)="categorie = $event">
             </app-categorie-choose>
             <button
                 nbButton
                 nbStepperNext
                 [disabled]="
-                  categorieId == null
+                  categorie == null
                 "
               >
                 Suivant
             </button>
         </nb-step>
-        <!-- Choisir sa catégorie -->
-        <nb-step>
+        <!-- Choisir son produit -->
+        <nb-step label="Produit">
             <app-produit-choose 
-            *ngIf="categorieId != null"
-            [categorieId]="categorieId"
-            (chosenProduitIdChange)="produitId = $event">
+            *ngIf="categorie != null"
+            [categorieId]="categorie.id"
+            (chosenProduitChange)="produit = $event">
             </app-produit-choose>
             <button
                 nbButton
                 nbStepperNext
                 [disabled]="
-                  categorieId == null || produitId == null
+                  categorie == null || produit == null
                 "
               >
                 Suivant
             </button>
         </nb-step>
         <!-- Choisir sa variété -->
-        <nb-step>
+        <nb-step label="Variétée">
             <app-variete-choose 
-            *ngIf="categorieId != null && produitId != null"
-            [produitId]="produitId"
-            (chosenVarieteIdChange)="varieteId = $event">
+            *ngIf="categorie != null && produit != null"
+            [produitId]="produit.id"
+            (chosenVarieteChange)="variete = $event">
             </app-variete-choose>
             <button
                 nbButton
                 nbStepperNext
                 [disabled]="
-                  categorieId == null || produitId == null || varieteId == null
+                  categorie == null || produit == null || variete == null
                 "
+                (click)="initForm()"
               >
                 Suivant
             </button>
         </nb-step>
         <!-- Prix, quantité, unité, date de péremption -->
-        <nb-step>
+        <nb-step label="Informations">
+          <form [formGroup]="produitForm"
+          *ngIf="isFormInitialized">
+            <nb-card>
+              <nb-card-header>
+              <h2>{{ produit.libelle }}, {{ variete.libelle }}</h2>
+              </nb-card-header>
+              <nb-card-body>
+                <div class="media">
+                  <img class="align-self-center mr-3" src="../../../assets/category.png" alt="Generic placeholder image">
+                  <div class="media-body">
+                    <p>Categorie : {{ categorie.libelle }}</p>
+                    <div class="single-produit-row">
+                      Quantite :                        
+                      <input nbInput 
+                        type="number"
+                        formControlName="quantite"> {{ produit.unite.lettre }}
+                    </div>
+                    <div class="single-produit-row">
+                      Prix : 
+                      <input nbInput 
+                      type="number"
+                      formControlName="prix"> 
+                      €
+                    </div>
+                    <div class="single-produit-row">
+                      Date limite de consommation : 
+                      <!--<input nbInput [nbDatepicker]="datepicker" formControlName="date">
+                      <nb-datepicker #datepicker format="dd-MM-yyyy"></nb-datepicker>-->
+                      <input type="date" formControlName="date" format="dd-MM-yyyy">
+                    </div>
+                    <div class="single-produit-row">
+                      <p>Vendu par : {{ authService.prenom }} {{ authService.nom }}</p>
+                    </div>
+                        
+                  </div>
+                </div>
 
+              </nb-card-body>
+            </nb-card>
+            
+            <button
+              nbButton
+              nbStepperNext
+              [disabled]="
+                categorie == null || produit == null || variete == null || produitForm.invalid
+              "
+              (click)="submitForm()"
+            >
+              Envoyer
+            </button>
+          </form>
+          
+        </nb-step>
+        <nb-step [hidden]="true">
+          <p>Votre produit a bien été envoyée. Il sera validé dans les 24 heures</p>
         </nb-step>
 
-    </nb-stepper>
 
+    </nb-stepper>
+  </nb-card-body>
 </nb-card>

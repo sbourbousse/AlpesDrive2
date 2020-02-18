@@ -41,7 +41,7 @@ export class NavbarComponent implements OnInit {
           {
             title: "Ajouter un produit",
             icon: "plus-circle-outline",
-            link: ["/"]
+            link: ["/producteur/ajouter-un-produit"]
           },
           {
             title: "Mon compte",

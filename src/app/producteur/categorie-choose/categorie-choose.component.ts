@@ -14,14 +14,14 @@ export class CategorieChooseComponent implements OnInit {
     private producteurService: ProducteurService
     ) { }
   categorieList : Categorie[] = [];
-  @Output() chosenCategorieIdChange = new EventEmitter<number>();
+  @Output() chosenCategorieChange = new EventEmitter<Categorie>();
 
   ngOnInit() {
     this.getCategories();
   }
 
-  choose(id) {
-    this.chosenCategorieIdChange.next(id);
+  choose(categorie: Categorie) {
+    this.chosenCategorieChange.next(categorie);
   }
 
   getCategories() {
