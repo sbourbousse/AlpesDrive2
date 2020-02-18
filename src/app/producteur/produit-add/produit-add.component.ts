@@ -25,6 +25,6 @@ export class ProduitAddComponent implements OnInit {
   test() {
     console.log(this.categorieId);
     console.log(this.produitId);
-
+    console.log(this.varieteId);
   }
 }

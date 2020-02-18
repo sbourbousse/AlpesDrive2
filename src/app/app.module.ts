@@ -42,6 +42,8 @@ import { HeaderComponent } from "./header/header.component";
 import { PointRelaisListComponent } from './producteur/point-relais-list/point-relais-list.component';
 import { ProduitAddComponent } from './producteur/produit-add/produit-add.component';
 import { CategorieChooseComponent } from './producteur/categorie-choose/categorie-choose.component';
+import { ProduitChooseComponent } from './producteur/produit-choose/produit-choose.component';
+import { VarieteChooseComponent } from './producteur/variete-choose/variete-choose.component';
 
 const appRoutes: Routes = [
   { path: "accueil", component: HomeComponent },
@@ -73,7 +75,9 @@ const appRoutes: Routes = [
     HeaderComponent,
     PointRelaisListComponent,
     ProduitAddComponent,
-    CategorieChooseComponent
+    CategorieChooseComponent,
+    ProduitChooseComponent,
+    VarieteChooseComponent
   ],
   imports: [
     BrowserModule,

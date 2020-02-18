@@ -13,6 +13,10 @@ export class ProducteurService {
   constructor(private http: HttpClient) {}
 
   private categorieListUrl: string = "http://sylvain-bourbousse.fr/api/categorie_list.php";
+  private produitListUrl: string = "http://sylvain-bourbousse.fr/api/produit_list.php";
+  private varieteListUrl: string = "http://sylvain-bourbousse.fr/api/variete_list.php";
+
+
   
   httpOptions = {
     headers: new HttpHeaders({ "Content-Type": "application/json" })
@@ -24,6 +28,20 @@ export class ProducteurService {
       .pipe(catchError(this.handleError<User>("getAllCategorie")));
     return response;
   } //TODO
+
+  getProduit(unIdCategorie) {
+    let response = this.http
+      .get(this.produitListUrl+"?catId="+unIdCategorie)
+      .pipe(catchError(this.handleError<User>("getProduit")));
+    return response;
+  }
+
+  getVariete(unIdProduit) {
+    let response = this.http
+      .get(this.varieteListUrl+"?proId="+unIdProduit)
+      .pipe(catchError(this.handleError<User>("getVariete")));
+    return response;
+  }
 
   /**
    * Handle Http operation that failed.

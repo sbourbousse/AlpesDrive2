@@ -1,0 +1,7 @@
+<div class="item-choice-container">
+    <div class="item-choice-single" 
+        *ngFor="let variete of varieteList"
+        (click)="choose(variete.id)">
+        <h2>{{ variete.libelle }}</h2>
+    </div>
+</div>
