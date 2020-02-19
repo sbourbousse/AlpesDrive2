@@ -41,7 +41,7 @@ export class NavbarComponent implements OnInit {
           {
             title: "Mes produits",
             icon: "cube-outline",
-            link: ["/"]
+            link: ["/producteur/mes-produits"]
           },
           {
             title: "Ajouter un produit",

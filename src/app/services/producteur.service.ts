@@ -18,6 +18,7 @@ export class ProducteurService {
   private produitListUrl: string = "http://sylvain-bourbousse.fr/api/produit_list.php";
   private varieteListUrl: string = "http://sylvain-bourbousse.fr/api/variete_list.php";
   private venteAddUrl: string = "http://sylvain-bourbousse.fr/api/vente_add.php";
+  private venteListUrl: string = "http://sylvain-bourbousse.fr/api/vente_list.php";
 
 
   
@@ -57,6 +58,17 @@ export class ProducteurService {
     let response = this.http
       .get(this.varieteListUrl+"?proId="+unIdProduit)
       .pipe(catchError(this.handleError<User>("getVariete")));
+    return response;
+  }
+
+  /**
+   * Récupère toute les ventes d'un producteur depuis l'api
+   * (venteId, prix, quantite, dateAjout, dateLimiteVente, valide, prodId, varieteLibelle, produitLibelle, produitImage, categorieLibelle, uniteLettre)
+   */
+  getVente(id: number): Observable <any> {
+    let response = this.http
+      .get(this.venteListUrl+"?id="+id)
+      .pipe(catchError(this.handleError<User>("getVente")));
     return response;
   }
 

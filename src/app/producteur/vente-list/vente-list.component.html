@@ -1,0 +1,34 @@
+<nb-card *ngFor="let vente of venteListe">
+    <nb-card-header>
+        Ajouté le {{ vente.dateAjout }}
+    </nb-card-header>
+    <nb-card-body>
+    <div class="media">
+        <img class="align-self-center mr-3" src="../../../assets/category.png" alt="Generic placeholder image">
+        <div class="media-body">
+            <div class="single-produit-row">
+                Categorie : {{ vente.categorie }}
+            </div>
+            <div class="single-produit-row">
+                Quantite :                        
+                {{ vente.quantite }} {{ vente.unite }}
+            </div>
+            <div class="single-produit-row">
+                Prix : 
+                {{ vente.prix }}
+                €
+            </div>
+            <div class="single-produit-row">
+                Date limite de consommation : {{ vente.dateLimiteVente }}
+            </div>
+            <div *ngIf="vente.valide == 1" class="single-produit-row text-success">
+                Produit validé
+            </div>
+            <div *ngIf="vente.valide == 0" class="single-produit-row text-info">
+                En attente de validation
+            </div>
+        </div>
+    </div>
+
+    </nb-card-body>
+</nb-card>

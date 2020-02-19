@@ -41,6 +41,7 @@ import { ProduitAddComponent } from './producteur/produit-add/produit-add.compon
 import { CategorieChooseComponent } from './producteur/categorie-choose/categorie-choose.component';
 import { ProduitChooseComponent } from './producteur/produit-choose/produit-choose.component';
 import { VarieteChooseComponent } from './producteur/variete-choose/variete-choose.component';
+import { VenteListComponent } from './producteur/vente-list/vente-list.component';
 
 const appRoutes: Routes = [
   { path: "accueil", component: HomeComponent },
@@ -52,6 +53,7 @@ const appRoutes: Routes = [
   { path: "inscription/mail", component: MailComponent },
   { path: "producteur/mes-points-relais", component: PointRelaisListComponent },
   { path: "producteur/ajouter-un-produit", component: ProduitAddComponent },
+  { path: "producteur/mes-produits", component: VenteListComponent },
   { path: "", redirectTo: "/accueil", pathMatch: "full" },
   { path: "**", component: FourOhFourComponent }
 ];
@@ -74,7 +76,8 @@ const appRoutes: Routes = [
     ProduitAddComponent,
     CategorieChooseComponent,
     ProduitChooseComponent,
-    VarieteChooseComponent
+    VarieteChooseComponent,
+    VenteListComponent
   ],
   imports: [
     BrowserModule,
