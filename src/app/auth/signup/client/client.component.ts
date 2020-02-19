@@ -22,7 +22,6 @@ export class ClientComponent implements OnInit {
     this.initForm();
   }
 
-  //Variables
   @Input() user: User;
   clientForm: FormGroup;
   errorMessage: string;
@@ -73,6 +72,10 @@ export class ClientComponent implements OnInit {
     this.postCode = this.clientForm.get("postCode");
   }
 
+  /**
+   * Récupére les valeurs des champs du formulaire 
+   * retourne une instance de Client ou null si le formulaire n'est pas correctment rempli
+   */
   getClient(): Client {
     const email = this.user.email;
     const password = this.user.password;
@@ -99,8 +102,8 @@ export class ClientComponent implements OnInit {
     }
   }
 
-  //Souscription du formulaire
-  submitForm() {
+  // Envoi du client
+  submitForm(): void {
     console.log(this.getClient());
     if (this.getClient() != null) {
       this.authService.signupClient(this.getClient()).subscribe(

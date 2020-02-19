@@ -6,6 +6,7 @@ import { Observable, of, BehaviorSubject } from "rxjs";
 import { Producteur } from "../models/producteur.model";
 import { PointRelais } from "../models/pointRelais.model";
 import { Client } from "../models/client.model";
+import { TestBed } from '@angular/core/testing';
 
 @Injectable({
   providedIn: "root"
@@ -15,13 +16,14 @@ export class AuthService {
 
   private isAuthSource = new BehaviorSubject<boolean>(false);
   isAuth = this.isAuthSource.asObservable();
-  userType;
-  contextId;
-  utilisateurId;
-  public prenom;
-  public nom;
-  pointRelaisList;
+  userType: string; // producteur, point_relais, client
+  contextId: number; // id du producteur ou point_relais ou client
+  utilisateurId: number;
+  prenom: string;
+  nom: string;
+  pointRelaisList; // ne concerne que les producteurs et points relais
 
+  
   private authUrl: string = "http://sylvain-bourbousse.fr/api/auth.php";
   private signupProducteurUrl: string =
     "http://sylvain-bourbousse.fr/api/producteur_add.php";
@@ -34,6 +36,10 @@ export class AuthService {
     headers: new HttpHeaders({ "Content-Type": "application/json" })
   };
 
+  /** 
+   * Envoie un utilisateur à l'api, attend un réponse au format JSON
+   * @param  user - utilisateur à authentifier
+   */
   signinUser(user: User): Observable<any> {
     let response = this.http.post(this.authUrl, JSON.stringify(user)).pipe(
       tap(() => console.log(`Logging user w/ email=${user.email}`)),
@@ -43,9 +49,17 @@ export class AuthService {
     return response;
   }
 
-  signoutUser() {
+  /**
+   * Déconnecte l'utilisateur, 
+   */
+  signoutUser(): void {
     this.setAuthFalse();
-    console.log("Deconnexion");
+    this.userType = null;  
+    this.contextId = null;
+    this.utilisateurId = null;
+    this.prenom = null;
+    this.nom = null;
+    this.pointRelaisList = null;
   }
 
   setAuthFalse(): void {
@@ -56,29 +70,38 @@ export class AuthService {
     this.isAuthSource.next(true);
   }
 
+  /**
+   * Stocker les données de l'utilisateur dans ce service
+   * @param data - une réponse au format JSON de l'api (auth.php)
+   */
   updateUser(data) {
     this.userType = data["userType"];
     this.utilisateurId= data["utilisateurId"];
+
     if (this.userType == "client"){
       this.prenom= data["clientPrenom"];
       this.nom= data["clientNom"];
       this.contextId= data["clientId"];
-    } else if (this.userType == "producteur") {
+    } 
+    else if (this.userType == "producteur") {
       this.prenom= data["prodPrenom"];
       this.nom= data["prodNom"];
       this.contextId= data["prodId"];
       this.pointRelaisList= data["pointRelais"];
-    } else if (this.userType == "point_relais") {
+    } 
+    else if (this.userType == "point_relais") {
       this.prenom= data["pointRelaisPrenomGerant"];
       this.nom= data["pointRelaisNomGerant"];
       this.contextId= data["pointRelaisId"];
       this.pointRelaisList= data["pointRelais"];
     }
-    console.log(data);
     this.setAuthTrue();
   }
 
-  //Inscriptions
+  /**
+   * Envoie à l'api un nouveau producteur à enregistrer
+   * @param unProducteur - producteur à envoyer
+   */
   signupProcteur(unProducteur: Producteur) {
     let response = this.http
       .post(this.signupProducteurUrl, JSON.stringify(unProducteur))
@@ -92,6 +115,10 @@ export class AuthService {
     return response;
   }
 
+  /**
+   * Envoie à l'api un nouveau point relais à enregistrer
+   * @param unPointRelais - point relais à envoyer
+   */
   signupPointRelais(unPointRelais: PointRelais) {
     let response = this.http
       .post(this.signupPointRelaisUrl, JSON.stringify(unPointRelais))
@@ -105,6 +132,10 @@ export class AuthService {
     return response;
   }
 
+  /**
+   * Envoie à l'api un nouveau client à enregistrer
+   * @param unClient - client à envoyer
+   */
   signupClient(unClient: Client) {
     let response = this.http
       .post(this.signupClientUrl, JSON.stringify(unClient))

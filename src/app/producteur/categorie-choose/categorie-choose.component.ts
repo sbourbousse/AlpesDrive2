@@ -1,7 +1,6 @@
 import { Component, OnInit, NgModule, EventEmitter, Output } from '@angular/core';
 import { Categorie } from '../../models/categorie.model';
 import { ProducteurService } from '../../services/producteur.service';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-categorie-choose',
@@ -12,7 +11,8 @@ export class CategorieChooseComponent implements OnInit {
 
   constructor(
     private producteurService: ProducteurService
-    ) { }
+    ) {}
+
   categorieList : Categorie[] = [];
   @Output() chosenCategorieChange = new EventEmitter<Categorie>();
 
@@ -20,11 +20,19 @@ export class CategorieChooseComponent implements OnInit {
     this.getCategories();
   }
 
-  choose(categorie: Categorie) {
+  /**
+   * Changer la valeur de la propriété chosenCategorieChange
+   * @param categorie - nouvelle catégorie
+   */
+  choose(categorie: Categorie): void {
     this.chosenCategorieChange.next(categorie);
   }
 
-  getCategories() {
+  /**
+   * Récupère toutes les catégories depuis le service, 
+   * insère les types dans la propriétée categorieList
+   */
+  getCategories(): void {
     this.producteurService.getAllCategorie().subscribe(
       res => {
         if (res != null) {

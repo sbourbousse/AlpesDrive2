@@ -1,21 +1,15 @@
   <div class="header-content">
+    <!-- Logo -->
     <div class="header-col-logo align-self-center mr-2">
       <img class="header-logo img-fluid" src="../../assets/alpes-drive-small-logo.png"/>
     </div>
+    <!-- Rubriques -->
     <div class="header-main align-self-center">
       <nb-actions size="medium" >
         <nb-action routerLink="/" icon="home-outline"></nb-action>
         <nb-action routerLink="/produits" icon="shopping-bag-outline"></nb-action>
-
-        <nb-action
-          *ngIf="!isAuth"
-          routerLink="/connexion"
-          icon="log-in-outline"
-        >
-        </nb-action>
-        <nb-action *ngIf="isAuth" (click)="logOut()" icon="log-out-outline">
-        </nb-action>
-
+        <nb-action *ngIf="!isAuth" routerLink="/connexion" icon="log-in-outline"></nb-action>
+        <nb-action *ngIf="isAuth" (click)="logOut()" icon="log-out-outline"></nb-action>
         <nb-action icon="checkmark-outline"> </nb-action>
       </nb-actions>
     </div>

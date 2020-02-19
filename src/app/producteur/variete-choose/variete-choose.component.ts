@@ -9,6 +9,7 @@ import { Variete } from '../../models/variete.model';
 export class VarieteChooseComponent implements OnInit {
 
   constructor(private producteurService: ProducteurService) { }
+
   @Output() chosenVarieteChange = new EventEmitter<Variete>();
   varieteList : Variete[] = [];
   @Input() produitId;
@@ -18,11 +19,19 @@ export class VarieteChooseComponent implements OnInit {
     this.getVarietes();
   }
 
-  choose(variete: Variete) {
+  /**
+   * Changer la valeur de la propriété chosenVarieteChange
+   * @param variete - nouvelle variétée
+   */
+  choose(variete: Variete): void {
     this.chosenVarieteChange.next(variete);
   }
 
-  getVarietes() {
+  /**
+   * Récupère toutes les variétés depuis le service, 
+   * insère les types dans la propriétée varieteList
+   */
+  getVarietes(): void {
     this.producteurService.getVariete(this.produitId).subscribe(
       res => {
         if (res != null) {

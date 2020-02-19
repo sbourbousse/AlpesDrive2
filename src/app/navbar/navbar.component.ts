@@ -20,7 +20,12 @@ import { filter, map } from 'rxjs/operators';
   imports: [NbContextMenuModule]
 })
 export class NavbarComponent implements OnInit {
-  constructor(private nbMenuService: NbMenuService, @Inject(NB_WINDOW) private window, private authService: AuthService) {}
+  constructor(
+    private nbMenuService: NbMenuService, 
+    @Inject(NB_WINDOW) private window, 
+    private authService: AuthService
+  ) {}
+  
   isAuth: boolean;
   items = [];
   contextItems = [
@@ -122,6 +127,5 @@ export class NavbarComponent implements OnInit {
         map(({ item: { title } }) => title),
       )
       .subscribe(title => this.window.alert(`${title} was clicked!`));
-  
   }
 }

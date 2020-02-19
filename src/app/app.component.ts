@@ -8,14 +8,15 @@ import { AuthService } from "./services/auth.service";
   styleUrls: ["./app.component.scss"]
 })
 export class AppComponent implements OnInit {
-  title = "AlpesDrive";
   constructor(
     private sidebarService: NbSidebarService,
     private authService: AuthService
   ) {}
+  
+  title = "Alpes Drive";
+  isAuth: boolean;
 
   ngOnInit() {
     this.authService.isAuth.subscribe(isAuth => (this.isAuth = isAuth));
   }
-  isAuth: boolean;
 }

@@ -15,11 +15,8 @@ import {
   NbActionsModule,
   NbDialogModule,
   NbMenuModule,
-  NbChatModule,
   NbDatepickerModule,
   NbSidebarModule,
-  NbToastrModule,
-  NbWindowModule,
   NbStepperModule,
   NbInputModule
 } from "@nebular/theme";

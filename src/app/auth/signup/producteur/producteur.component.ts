@@ -20,15 +20,6 @@ export class ProducteurComponent implements OnInit {
     private route: Router
   ) {}
 
-  ngOnInit() {
-    this.initForm();
-  }
-
-  onCounterChange(entreprise: Entreprise) {
-    this.monEntreprise = entreprise;
-  }
-
-  //Variables
   @Input() user: User;
   producteurForm: FormGroup;
   errorMessage: string;
@@ -41,7 +32,11 @@ export class ProducteurComponent implements OnInit {
   city;
   postCode;
 
-  initForm() {
+  ngOnInit() {
+    this.initForm();
+  }
+
+  initForm(): void {
     this.producteurForm = this.formBuilder.group({
       firstname: [
         "",
@@ -80,6 +75,10 @@ export class ProducteurComponent implements OnInit {
     this.postCode = this.producteurForm.get("postCode");
   }
 
+  /**
+   * Récupére les valeurs des champs du formulaire 
+   * retourne une instance de Producteur ou null si le formulaire n'est pas correctment rempli
+   */
   getProducteur(): Producteur {
     const email = this.user.email;
     const password = this.user.password;
@@ -106,8 +105,8 @@ export class ProducteurComponent implements OnInit {
     }
   }
 
-  //Souscription du formulaire
-  submitForm() {
+  //Envoi du producteur
+  submitForm(): void {
     console.log(this.getProducteur());
     if (this.getProducteur() != null) {
       this.authService.signupProcteur(this.getProducteur()).subscribe(

@@ -20,12 +20,7 @@ export class EntrepriseComponent implements OnInit {
     this.initForm();
   }
 
-  //Méthode pour enoyer au component parent une instance d'entreprise
-  sendValue() {
-    this.counterChange.emit(this.getEntreprise());
-  }
-
-  initForm() {
+  initForm(): void {
     //TODO validateurs de l'entreprise
     this.entrepriseForm = this.formBuilder.group({
       id: [
@@ -47,7 +42,18 @@ export class EntrepriseComponent implements OnInit {
     this.iBAN = this.entrepriseForm.get("iBAN");
   }
 
-  // Renvoie null si le formulaire n'est pas correctement remplie
+  /**
+   * Méthode pour envoyer au component parent une instance de l'entreprise, 
+   * effectué à chaque changement de valeurs des champs du formulaire
+   */
+  sendValue(): void {
+    this.counterChange.emit(this.getEntreprise());
+  }
+
+  /**
+   * Récupére les valeurs des champs du formulaire 
+   * retourne une instance d'Entreprise ou null si le formulaire n'est pas correctment rempli
+   */
   getEntreprise(): Entreprise {
     const id = this.entrepriseForm.get("id").value;
     const name = this.entrepriseForm.get("name").value;

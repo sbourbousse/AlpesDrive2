@@ -1,11 +1,9 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { User } from "../models/user.model";
-import { catchError, map, tap } from "rxjs/operators";
-import { Observable, of, BehaviorSubject } from "rxjs";
-import { Entreprise } from "../models/entreprise.model";
-import { PointRelais } from "../models/pointRelais.model";
-import { PointRelaisType } from "../models/pointRelaisType.model";
+import { catchError } from "rxjs/operators";
+import { Observable, of } from "rxjs";
+
 
 @Injectable({
   providedIn: "root"
@@ -14,28 +12,41 @@ export class PointRelaisService {
   constructor(private http: HttpClient) {}
 
   private pointRelaisListUrl: string = "http://sylvain-bourbousse.fr/api/pointRelais_list.php";
-  private pointRelaisTypeListUrl: string =
-    "http://sylvain-bourbousse.fr/api/pointRelaisType_list.php ";
+  private pointRelaisTypeListUrl: string = "http://sylvain-bourbousse.fr/api/pointRelaisType_list.php";
 
   httpOptions = {
     headers: new HttpHeaders({ "Content-Type": "application/json" })
   };
 
-  getAllPointRelais() {
+  /**
+   * Récupérer tout les points relais de l'api
+   * (pointRelaisId, pointRelaisAdresse, pointRelaisVille, pointRelaisCodePostal, pointRelaisTypeLibelle, entrepriseLibelle)
+   */
+  getAllPointRelais(): Observable<any> {
     let response = this.http
       .get(this.pointRelaisListUrl)
-      .pipe(catchError(this.handleError<User>("getPointRelais")));
+      .pipe(catchError(this.handleError<User>("getAllPointRelais")));
     return response;
-  } //TODO
+  }
 
-  getPointRelais(id, userType) {
+  /**
+   * Récupérer les points relais correspondant à un producteur 
+   * (pointRelaisId, pointRelaisAdresse, pointRelaisVille, pointRelaisCodePostal, pointRelaisTypeLibelle, entrepriseLibelle)
+   * @param - identifiant du producteur ou client (à prendre dans AuthService)
+   * @param - type d'utilisateur : producteur ou client (à prendre dans AuthService)
+   */
+  getPointRelais(id, userType): Observable<any> {
     let response = this.http
       .get(this.pointRelaisListUrl+"?userType="+userType+"&id="+id, this.httpOptions)
       .pipe(catchError(this.handleError<User>("getPointRelais")));
     return response;
-  } //TODO
+  }
 
-  getPointRelaisType() {
+  /**
+   * Récupére les types de points relais 
+   * (pointRelaisTypeId, pointRelaisTypeLibelle)
+   */
+  getPointRelaisType(): Observable<any> {
     let response = this.http
       .get(this.pointRelaisTypeListUrl)
       .pipe(catchError(this.handleError<User>("getPointRelaisType")));

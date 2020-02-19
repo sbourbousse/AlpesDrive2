@@ -1,5 +1,5 @@
 <p *ngIf="!complete" class="text-center">Chargement en cours ...</p>
-<p *ngIf="complete && pointRelaisListe == null" class="text-center">Aucun point-relais ...</p>
+<p *ngIf="empty" class="text-center">Aucun point-relais ...</p>
 <nb-card *ngFor="let pointRelais of pointRelaisListe">
     <nb-card-header>{{ pointRelais.libelle }}</nb-card-header>
     <nb-card-body>

@@ -16,19 +16,17 @@ export class SigninComponent implements OnInit {
     private route: Router
   ) {}
 
+  signinForm: FormGroup;
+  error = false;
+  errorMessage: string;
+  isAuth: boolean;
+
   ngOnInit() {
     this.intiForm();
     this.authService.isAuth.subscribe(isAuth => (this.isAuth = isAuth));
   }
 
-  //Variables
-  signinForm: FormGroup;
-  error = false;
-  errorMessage: string;
-  private isAuth: boolean;
-
-  //Méthodes
-  intiForm() {
+  intiForm(): void {
     this.signinForm = this.formBuilder.group({
       email: ["", [Validators.required, Validators.email]],
       password: [
@@ -39,7 +37,7 @@ export class SigninComponent implements OnInit {
   }
 
   // Connexion
-  onSubmit() {
+  onSubmit(): void {
     const email = this.signinForm.get("email").value;
     const password = this.signinForm.get("password").value;
 
@@ -63,7 +61,8 @@ export class SigninComponent implements OnInit {
     }
   }
 
-  onLogOut() {
+  //Déconnexion
+  onLogOut(): void {
     this.authService.signoutUser;
   }
 }

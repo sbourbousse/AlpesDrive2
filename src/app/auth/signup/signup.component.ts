@@ -16,19 +16,15 @@ export class SignupComponent implements OnInit {
     private route: Router
   ) {}
 
-  ngOnInit() {
-    this.initForm();
-    //this.authService.isAuth.subscribe(isAuth => (this.isAuth = isAuth));
-  }
-
-  //Variables
   signupForm: FormGroup;
   errorMessage: string;
-  //private isAuth: boolean;
   userType: string;
 
-  //Méthodes
-  initForm() {
+  ngOnInit() {
+    this.initForm();
+  }
+
+  initForm(): void {
     this.signupForm = this.formBuilder.group({
       email: ["", [Validators.required, Validators.email]],
       password: [
@@ -38,8 +34,12 @@ export class SignupComponent implements OnInit {
     });
   }
 
-  signupType(userType: string) {
-    console.log("Vous avez choisi " + userType);
+  /**
+   * Donner la valeur producteur, client, point relais à la propriété userType
+   * Utilisé par le bouton de choix de type d'inscription
+   * @param - "producteur", "client" ou "point-relais"
+   */
+  signupType(userType: string): void {
     switch (userType) {
       case "producteur":
         this.userType = userType;
@@ -53,6 +53,10 @@ export class SignupComponent implements OnInit {
     }
   }
 
+ /**
+   * Récupére les valeurs des champs du formulaire 
+   * retourne une instance de User ou null si le formulaire n'est pas correctment rempli
+   */
   getUser(): User {
     const email = this.signupForm.get("email").value;
     const password = this.signupForm.get("password").value;

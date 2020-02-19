@@ -10,7 +10,8 @@ import { Unite } from '../../models/unite.model';
 })
 export class ProduitChooseComponent implements OnInit {
 
-  constructor(private producteurService: ProducteurService) { }
+  constructor(private producteurService: ProducteurService) {}
+
   @Output() chosenProduitChange = new EventEmitter<Produit>();
   produitList : Produit[] = [];
   @Input() categorieId;
@@ -20,11 +21,19 @@ export class ProduitChooseComponent implements OnInit {
     this.getProduits();
   }
 
-  choose(produit: Produit) {
+  /**
+   * Changer la valeur de la propriété chosenProduitChange
+   * @param produit - nouveau produit
+   */
+  choose(produit: Produit): void {
     this.chosenProduitChange.next(produit);
   }
 
-  getProduits() {
+  /**
+   * Récupère tout les produits depuis le service, 
+   * insère les types dans la propriétée produitList
+   */
+  getProduits(): void {
     this.producteurService.getProduit(this.categorieId).subscribe(
       res => {
         if (res != null) {
@@ -44,7 +53,6 @@ export class ProduitChooseComponent implements OnInit {
               )
             );
           }
-          console.log(this.produitList);
         } else {
           console.log("Aucun produit");
         }

@@ -23,16 +23,6 @@ export class PointRelaisComponent implements OnInit {
     private route: Router
   ) {}
 
-  ngOnInit() {
-    this.initForm();
-    this.getPointRelaisType();
-  }
-
-  onCounterChange(entreprise: Entreprise) {
-    this.monEntreprise = entreprise;
-  }
-
-  //Variables
   @Input() user: User;
   pointRelaisForm: FormGroup;
   errorMessage: string;
@@ -47,7 +37,12 @@ export class PointRelaisComponent implements OnInit {
   postCode;
   type;
 
-  initForm() {
+  ngOnInit() {
+    this.initForm();
+    this.getPointRelaisType();
+  }
+
+  initForm(): void {
     this.pointRelaisForm = this.formBuilder.group({
       firstname: [
         "",
@@ -88,7 +83,11 @@ export class PointRelaisComponent implements OnInit {
     this.type = this.pointRelaisForm.get("type");
   }
 
-  getPointRelaisType() {
+  /**
+   * Récupère les types de points relais depuis le service, 
+   * insère les types dans la propriétée tabPointRelaisType
+   */
+  getPointRelaisType(): void {
     this.tabPointRelaisType = [];
     this.pointRelaisService.getPointRelaisType().subscribe(
       res => {
@@ -100,7 +99,6 @@ export class PointRelaisComponent implements OnInit {
             )
           );
         }
-        //console.log(this.tabPointRelaisType);
       },
       error => {
         console.log("Connexion au serveur impossible.");
@@ -108,6 +106,10 @@ export class PointRelaisComponent implements OnInit {
     );
   }
 
+  /**
+   * Récupére les valeurs des champs du formulaire 
+   * retourne une instance de PointRelais ou null si le formulaire n'est pas correctment rempli
+   */
   getPointRelais(): PointRelais {
     const email = this.user.email;
     const password = this.user.password;
@@ -137,8 +139,8 @@ export class PointRelaisComponent implements OnInit {
     }
   }
 
-  //Souscription du formulaire
-  submitForm() {
+  //Envoi du point relais
+  submitForm(): void {
     console.log(this.getPointRelais());
     if (this.getPointRelais() != null) {
       this.authService.signupPointRelais(this.getPointRelais()).subscribe(

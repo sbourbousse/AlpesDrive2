@@ -25,27 +25,45 @@ export class ProducteurService {
     headers: new HttpHeaders({ "Content-Type": "application/json" })
   };
 
-  getAllCategorie() {
+  /**
+   * Récupère toutes les catégories depuis l'api
+   * (categorieId, categorieLibelle, categorieImage)
+   */
+  getAllCategorie(): Observable <any> {
     let response = this.http
       .get(this.categorieListUrl)
       .pipe(catchError(this.handleError<User>("getAllCategorie")));
     return response;
-  } //TODO
+  }
 
-  getProduit(unIdCategorie) {
+  /**
+   * Récupère tout les produits et leurs unités d'une catégorie depuis l'api
+   * (produitId, produitLibelle, produitImage, unite.uniteId, uniteLibelle, uniteLettre, uniteQuantiteVente)
+   * @param unIdCategorie - id de la catégorie dont on veut les produits
+   */
+  getProduit(unIdCategorie: number): Observable <any> {
     let response = this.http
       .get(this.produitListUrl+"?catId="+unIdCategorie)
       .pipe(catchError(this.handleError<User>("getProduit")));
     return response;
   }
 
-  getVariete(unIdProduit) {
+   /**
+   * Récupère toute les variétées d'un produit depuis l'api
+   * (varieteId, varieteLibelle)
+   * @param unIdProduit - id du produit dont on veut les variétées
+   */
+  getVariete(unIdProduit): Observable <any> {
     let response = this.http
       .get(this.varieteListUrl+"?proId="+unIdProduit)
       .pipe(catchError(this.handleError<User>("getVariete")));
     return response;
   }
 
+  /**
+   * Envoie une vente à l'api pour être ajoutée dans la base de données
+   * @param uneVente - vente à envoyer
+   */
   createNewVente(uneVente: Vente) {
     let response = this.http
       .post(this.venteAddUrl, JSON.stringify(uneVente))
@@ -55,7 +73,6 @@ export class ProducteurService {
         ),
         catchError(this.handleError<User>("createNewVente"))
       );
-
     return response;
   }
 
