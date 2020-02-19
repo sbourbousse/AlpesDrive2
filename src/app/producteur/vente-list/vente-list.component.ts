@@ -24,7 +24,7 @@ export class VenteListComponent implements OnInit {
 
   /**
    * Récupère toutes les ventes qu'à efféctué le producteur,
-   * les ajoutes à la propriétée pointRelaisListe ou empty recoit true si le producteur n'a pas de point relais
+   * les ajoutes à la propriétée venteListe ou empty recoit true si le producteur n'a pas de ventes
    */
   getVente(): void {
     this.producteurService.getVente(this.authService.contextId).subscribe(
