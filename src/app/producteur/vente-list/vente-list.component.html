@@ -1,11 +1,15 @@
 <nb-card *ngFor="let vente of venteListe">
     <nb-card-header>
-        Ajouté le {{ vente.dateAjout }}
+        <h2>{{ vente.produit }}, {{ vente.variete }}</h2>
+
     </nb-card-header>
     <nb-card-body>
     <div class="media">
         <img class="align-self-center mr-3" src="../../../assets/category.png" alt="Generic placeholder image">
         <div class="media-body">
+            <div class="single-produit-row">
+                Ajouté le {{ vente.dateAjout }}
+            </div>
             <div class="single-produit-row">
                 Categorie : {{ vente.categorie }}
             </div>
