@@ -35,8 +35,13 @@ export class ProduitAddComponent implements OnInit {
   errorMessage;
   error = false;
   loading = true;
+  step = 1;
 
   ngOnInit() {
+  }
+
+  nextStep() {
+    this.step++;
   }
 
   initForm(): void {

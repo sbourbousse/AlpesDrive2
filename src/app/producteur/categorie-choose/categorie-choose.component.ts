@@ -26,6 +26,7 @@ export class CategorieChooseComponent implements OnInit {
    */
   choose(categorie: Categorie): void {
     this.chosenCategorieChange.next(categorie);
+    console.log(categorie);
   }
 
   /**
