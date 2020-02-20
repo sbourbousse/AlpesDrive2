@@ -42,6 +42,7 @@ import { CategorieChooseComponent } from './producteur/categorie-choose/categori
 import { ProduitChooseComponent } from './producteur/produit-choose/produit-choose.component';
 import { VarieteChooseComponent } from './producteur/variete-choose/variete-choose.component';
 import { VenteListComponent } from './producteur/vente-list/vente-list.component';
+import { AuthGuardService } from './services/auth-guard.service';
 
 const appRoutes: Routes = [
   { path: "accueil", component: HomeComponent },
@@ -51,9 +52,9 @@ const appRoutes: Routes = [
   { path: "inscription/point-relais", component: PointRelaisComponent },
   { path: "inscription/client", component: ClientComponent },
   { path: "inscription/mail", component: MailComponent },
-  { path: "producteur/mes-points-relais", component: PointRelaisListComponent },
-  { path: "producteur/ajouter-un-produit", component: ProduitAddComponent },
-  { path: "producteur/mes-produits", component: VenteListComponent },
+  { path: "producteur/mes-points-relais", canActivate: [AuthGuardService], component: PointRelaisListComponent, data: {role: ['producteur']} },
+  { path: "producteur/ajouter-un-produit", canActivate: [AuthGuardService], component: ProduitAddComponent, data: {role: ['producteur']} },
+  { path: "producteur/mes-produits", canActivate: [AuthGuardService], component: VenteListComponent, data: {role: ['producteur']} },
   { path: "", redirectTo: "/accueil", pathMatch: "full" },
   { path: "**", component: FourOhFourComponent }
 ];
