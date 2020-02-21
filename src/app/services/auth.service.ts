@@ -21,7 +21,8 @@ export class AuthService {
   utilisateurId: number;
   prenom: string;
   nom: string;
-  pointRelaisList; // ne concerne que les producteurs et points relais
+  pointRelaisList; // ne concerne que les producteurs et client
+  producteurList; // ne concerne que les point-relais
 
   
   private authUrl: string = "http://sylvain-bourbousse.fr/api/auth.php";
@@ -82,6 +83,7 @@ export class AuthService {
       this.prenom= data["clientPrenom"];
       this.nom= data["clientNom"];
       this.contextId= data["clientId"];
+      this.pointRelaisList= data["pointRelais"];
     } 
     else if (this.userType == "producteur") {
       this.prenom= data["prodPrenom"];
@@ -93,7 +95,7 @@ export class AuthService {
       this.prenom= data["pointRelaisPrenomGerant"];
       this.nom= data["pointRelaisNomGerant"];
       this.contextId= data["pointRelaisId"];
-      this.pointRelaisList= data["pointRelais"];
+      this.producteurList= data["producteur"];
     }
     this.setAuthTrue();
   }

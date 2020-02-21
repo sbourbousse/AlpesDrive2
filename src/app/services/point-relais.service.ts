@@ -13,6 +13,8 @@ export class PointRelaisService {
 
   private pointRelaisListUrl: string = "http://sylvain-bourbousse.fr/api/pointRelais_list.php";
   private pointRelaisTypeListUrl: string = "http://sylvain-bourbousse.fr/api/pointRelaisType_list.php";
+  private producteurListUrl: string = "http://sylvain-bourbousse.fr/api/producteur_list.php";
+
 
   httpOptions = {
     headers: new HttpHeaders({ "Content-Type": "application/json" })
@@ -54,6 +56,17 @@ export class PointRelaisService {
   }
 
   /**
+   * Récupére les producteur d'un point relais
+   * (prodId, prodPrenom, prodNom, prodTel, prodAdresse, prodVille, prodCodePostal, entrepriseLibelle)
+   */
+  getProducteur(id, userType): Observable<any> {
+    let response = this.http
+      .get(this.producteurListUrl+"?userType="+userType+"&id="+id, this.httpOptions)
+      .pipe(catchError(this.handleError<User>("getProducteur")));
+    return response;
+  }
+
+  /**
    * Handle Http operation that failed.
    * Let the app continue.
    * @param operation - name of the operation that failed
@@ -71,4 +84,5 @@ export class PointRelaisService {
       return of(result as T);
     };
   }
+
 }
