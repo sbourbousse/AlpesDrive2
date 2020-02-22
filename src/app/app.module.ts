@@ -43,6 +43,11 @@ import { ProduitChooseComponent } from './producteur/produit-choose/produit-choo
 import { VarieteChooseComponent } from './producteur/variete-choose/variete-choose.component';
 import { VenteListComponent } from './producteur/vente-list/vente-list.component';
 import { AuthGuardService } from './services/auth-guard.service';
+import { ProducteurListComponent } from './point-relais/producteur-list/producteur-list.component';
+import { AchatListComponent } from './point-relais/achat-list/achat-list.component';
+import { CommandeListComponent } from './client/commande-list/commande-list.component';
+import { PanierComponent } from './client/panier/panier.component';
+import { PointRelaisList2Component } from './client/point-relais-list2/point-relais-list2.component';
 
 const appRoutes: Routes = [
   { path: "accueil", component: HomeComponent },
@@ -55,6 +60,10 @@ const appRoutes: Routes = [
   { path: "producteur/mes-points-relais", canActivate: [AuthGuardService], component: PointRelaisListComponent, data: {role: ['producteur']} },
   { path: "producteur/ajouter-un-produit", canActivate: [AuthGuardService], component: ProduitAddComponent, data: {role: ['producteur']} },
   { path: "producteur/mes-produits", canActivate: [AuthGuardService], component: VenteListComponent, data: {role: ['producteur']} },
+  { path: "point-relais/mes-producteurs", canActivate: [AuthGuardService], component: ProducteurListComponent, data: {role: ['point_relais']} },
+  { path: "client/mes-points-relais", canActivate: [AuthGuardService], component: PointRelaisList2Component, data: {role: ['client']} },
+  { path: "client/panier", canActivate: [AuthGuardService], component: PanierComponent, data: {role: ['client']} },
+  { path: "client/mes-commandes", canActivate: [AuthGuardService], component: CommandeListComponent, data: {role: ['client']} },
   { path: "", redirectTo: "/accueil", pathMatch: "full" },
   { path: "**", component: FourOhFourComponent }
 ];
@@ -78,7 +87,12 @@ const appRoutes: Routes = [
     CategorieChooseComponent,
     ProduitChooseComponent,
     VarieteChooseComponent,
-    VenteListComponent
+    VenteListComponent,
+    ProducteurListComponent,
+    AchatListComponent,
+    CommandeListComponent,
+    PanierComponent,
+    PointRelaisList2Component
   ],
   imports: [
     BrowserModule,
