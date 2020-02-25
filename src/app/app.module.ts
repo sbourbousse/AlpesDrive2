@@ -48,6 +48,8 @@ import { AchatListComponent } from './point-relais/achat-list/achat-list.compone
 import { CommandeListComponent } from './client/commande-list/commande-list.component';
 import { PanierComponent } from './client/panier/panier.component';
 import { PointRelaisList2Component } from './client/point-relais-list2/point-relais-list2.component';
+import { VenteList2Component } from './client/vente-list2/vente-list2.component';
+import { SingleVenteComponent } from './client/single-vente/single-vente.component';
 
 const appRoutes: Routes = [
   { path: "accueil", component: HomeComponent },
@@ -64,6 +66,8 @@ const appRoutes: Routes = [
   { path: "client/mes-points-relais", canActivate: [AuthGuardService], component: PointRelaisList2Component, data: {role: ['client']} },
   { path: "client/panier", canActivate: [AuthGuardService], component: PanierComponent, data: {role: ['client']} },
   { path: "client/mes-commandes", canActivate: [AuthGuardService], component: CommandeListComponent, data: {role: ['client']} },
+  { path: "client/boutique", canActivate: [AuthGuardService], component: VenteList2Component, data: {role: ['client']} },
+  { path: "boutique/:id", canActivate: [AuthGuardService], component: SingleVenteComponent, data: {role: ['client']} },
   { path: "", redirectTo: "/accueil", pathMatch: "full" },
   { path: "**", component: FourOhFourComponent }
 ];
@@ -92,7 +96,9 @@ const appRoutes: Routes = [
     AchatListComponent,
     CommandeListComponent,
     PanierComponent,
-    PointRelaisList2Component
+    PointRelaisList2Component,
+    VenteList2Component,
+    SingleVenteComponent
   ],
   imports: [
     BrowserModule,

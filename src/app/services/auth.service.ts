@@ -6,13 +6,17 @@ import { Observable, of, BehaviorSubject } from "rxjs";
 import { Producteur } from "../models/producteur.model";
 import { PointRelais } from "../models/pointRelais.model";
 import { Client } from "../models/client.model";
-import { TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing'
+import { Router } from '@angular/router'
 
 @Injectable({
   providedIn: "root"
 })
 export class AuthService {
-  constructor(private http: HttpClient) {}
+  constructor(
+      private http: HttpClient,
+      private router: Router
+    ) {}
 
   private isAuthSource = new BehaviorSubject<boolean>(false);
   isAuth = this.isAuthSource.asObservable();
@@ -61,6 +65,7 @@ export class AuthService {
     this.prenom = null;
     this.nom = null;
     this.pointRelaisList = null;
+    this.router.navigate(["/"])
   }
 
   setAuthFalse(): void {

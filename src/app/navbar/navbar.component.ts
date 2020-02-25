@@ -68,14 +68,19 @@ export class NavbarComponent implements OnInit {
       } else if (this.authService.userType == "client") {
         this.items = [
           {
+            title: "Boutique",
+            icon: "shopping-bag-outline",
+            link: ["/client/boutique"]
+          },
+          {
             title: "Mon panier",
             icon: "shopping-cart-outline",
-            link: ["/"]
+            link: ["/client/panier"]
           },
           {
             title: "Mes commandes",
             icon: "car-outline",
-            link: ["/"]
+            link: ["/client/mes-commandes"]
           },
           {
             title: "Mon compte",
@@ -84,7 +89,7 @@ export class NavbarComponent implements OnInit {
               {
                 title: "Mes points relais",
                 icon: "home-outline",
-                link: ["/"]
+                link: ["/client/mes-points-relais"]
               },
               {
                 title: "Mes informations",
@@ -108,7 +113,7 @@ export class NavbarComponent implements OnInit {
               {
                 title: "Producteurs",
                 icon: "people-outline",
-                link: ["/"]
+                link: ["/point-relais/mes-producteurs"]
               },
               {
                 title: "Mes informations",

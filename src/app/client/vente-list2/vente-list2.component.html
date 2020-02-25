@@ -1,0 +1,32 @@
+
+<nb-card *ngFor="let vente of venteList">
+    <nb-card-header>
+        <a routerLink="/boutique/{{ vente.id }}" >{{ vente.produit }} - {{ vente.variete }}</a>
+    </nb-card-header>
+    <nb-card-body>
+        <div class="media">
+            <img class="align-self-center mr-3" src="../../../assets/category.png" alt="Generic placeholder image">
+            <div class="media-body">
+                <div class="single-produit-row">
+                    Ajouté le {{ vente.dateAjout }}
+                </div>
+                <div class="single-produit-row">
+                    Categorie : {{ vente.categorie }}
+                </div>
+                <div class="single-produit-row">
+                    Quantite :                        
+                    {{ vente.quantite }} {{ vente.unite }}
+                </div>
+                <div class="single-produit-row">
+                    Prix : 
+                    {{ vente.prix }}
+                    €
+                </div>
+                <div class="single-produit-row">
+                    Date limite de consommation : {{ vente.dateLimiteVente }}
+                </div>
+                <div class="single-produit-row">Disponible dans {{ vente.nombreProposant }} de vos points-relais</div>
+            </div>
+        </div>
+    </nb-card-body>
+</nb-card>
