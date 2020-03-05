@@ -19,7 +19,8 @@ import {
   NbSidebarModule,
   NbStepperModule,
   NbInputModule,
-  NbRadioModule
+  NbRadioModule,
+  NbToastrModule
 } from "@nebular/theme";
 
 import { AppComponent } from "./app.component";
@@ -123,7 +124,8 @@ const appRoutes: Routes = [
     NbIconModule,
     NbDialogModule.forRoot(),
     NbDatepickerModule.forRoot(),
-    NbRadioModule
+    NbRadioModule,
+    NbToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent],

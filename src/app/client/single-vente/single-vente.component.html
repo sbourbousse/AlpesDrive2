@@ -49,7 +49,7 @@
                             {{unPointRelais.adresse}}, {{ unPointRelais.ville }}, {{ unPointRelais.codePostal }}
                         </nb-radio>
                     </nb-radio-group>
-                    <button nbButton (click)="submit()">Ajouter au panier</button>
+                    <button nbButton (click)="submit()" [disabled]="achatForm.invalid">Ajouter au panier</button>
                     </form>
                 </nb-card-body>
             </nb-card>

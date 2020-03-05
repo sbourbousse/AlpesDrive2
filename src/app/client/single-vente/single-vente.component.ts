@@ -6,6 +6,7 @@ import { AuthService } from '../../services/auth.service';
 import { VenteInfo } from '../../models/vente.model';
 import { Article } from '../../models/article.model';
 import { Router } from '@angular/router'
+import { NbToastrService } from '@nebular/theme';
 
 @Component({
   selector: 'app-single-vente',
@@ -18,13 +19,16 @@ export class SingleVenteComponent implements OnInit {
     private clientService: ClientService,
     private authService: AuthService,
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    private toastrService: NbToastrService
   ) { }
   id;
   venteInfo: VenteInfo;
   notFound = false;
   error = false;
   achatForm: FormGroup;
+  private index: number = 0;
+
 
   ngOnInit() {
     this.id = this.route.snapshot.params.id
@@ -87,14 +91,24 @@ export class SingleVenteComponent implements OnInit {
             this.clientService.updatePanier(this.authService.contextId);
             this.router.navigate(["/client/panier"]);
           }
-          else
+          else {
             console.log(res.new.message)
+            this.showToast('top-right', 'danger', 'Erreur', res.new.message)
+          }
         },
         error => {
         
         }
       )
     }
+  }
+
+  showToast(position, status, message, title) {
+    this.index += 1;
+    this.toastrService.show(
+      title,
+      message,
+      { position, status });
   }
 
   
