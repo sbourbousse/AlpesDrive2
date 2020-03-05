@@ -1,0 +1,46 @@
+<div class="row">
+    <div class="col-8">
+        <nb-card *ngFor="let article of articleList">
+            <nb-card-header>
+                <a routerLink="/boutique/{{ article.id }}" >{{ article.produit }} - {{ article.variete }}</a>
+            </nb-card-header>
+            <nb-card-body>
+                <div class="media">
+                    <img class="align-self-center mr-3" src="../../../assets/category.png" alt="Generic placeholder image">
+                    <div class="media-body">
+                        <div class="single-produit-row">
+                            Ajouté le {{ article.dateAjout }}
+                        </div>
+                        <div class="single-produit-row">
+                            Categorie : {{ article.categorie }}
+                        </div>
+                        <div class="single-produit-row">
+                            Quantite :                        
+                            {{ article.quantite }} {{ article.unite }}
+                        </div>
+                        <div class="single-produit-row">
+                            Prix : 
+                            {{ article.prix }}
+                            €
+                        </div>
+                        <button nbButton status="warning"
+                        (click)="removeArticle(article.id)">Retirer</button>
+                    </div>
+                </div>
+            </nb-card-body>
+        </nb-card>
+    </div>
+    <div class="col-4">
+        <nb-card>
+            <nb-card-header>
+                Recapitulatif du panier
+            </nb-card-header>
+            <nb-card-body>
+                <p>Nombre d'article : {{ getNombreArticle() }}</p>
+                <p>Total : <b>{{ getSommePanier() }} €</b></p>
+                <button nbButton status="success">Commander</button>
+            </nb-card-body>
+        </nb-card>
+    </div>
+</div>
+

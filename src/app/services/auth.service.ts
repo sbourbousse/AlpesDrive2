@@ -8,6 +8,7 @@ import { PointRelais } from "../models/pointRelais.model";
 import { Client } from "../models/client.model";
 import { TestBed } from '@angular/core/testing'
 import { Router } from '@angular/router'
+import { ClientService } from './client.service'
 
 @Injectable({
   providedIn: "root"
@@ -15,7 +16,8 @@ import { Router } from '@angular/router'
 export class AuthService {
   constructor(
       private http: HttpClient,
-      private router: Router
+      private router: Router,
+      private clientService: ClientService
     ) {}
 
   private isAuthSource = new BehaviorSubject<boolean>(false);
@@ -89,6 +91,7 @@ export class AuthService {
       this.nom= data["clientNom"];
       this.contextId= data["clientId"];
       this.pointRelaisList= data["pointRelais"];
+      this.clientService.updatePanier(this.contextId);
     } 
     else if (this.userType == "producteur") {
       this.prenom= data["prodPrenom"];
