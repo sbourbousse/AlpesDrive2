@@ -7,3 +7,30 @@ export class Vente {
 		public varieteId: number
 	) {}
 }
+
+export interface VenteInfo {
+	id,
+	prix,
+	quantite,
+	dateAjout,
+	dateLimiteVente,
+	producteur: {
+	  nom,
+	  prenom
+	},
+	unite,
+	variete,
+	produit,
+	categorie,
+	image,
+	pointRelaisList: {
+	  id,
+	  adresse,
+	  ville,
+	  codePostal,
+	  libelle,
+	  typeId,
+	  typeLibelle
+	}[]
+	pointRelaisChoisi?
+};

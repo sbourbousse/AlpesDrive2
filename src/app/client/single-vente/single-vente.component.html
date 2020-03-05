@@ -1,0 +1,63 @@
+<div *ngIf="venteInfo">
+    <div class="row" *ngIf="!error && !notFound">
+        <div class="col-8">
+            <nb-card>
+                <nb-card-header>
+                    {{ venteInfo.produit }} - {{ venteInfo.variete }}
+                </nb-card-header>
+                <nb-card-body>
+                    <div class="media">
+                        <img class="align-self-center mr-3" src="../../../assets/category.png" alt="Generic placeholder image">
+                        <div class="media-body">
+                            <div class="single-produit-row">
+                                Ajouté le {{ venteInfo.dateAjout }}
+                            </div>
+                            <div class="single-produit-row">
+                                Categorie : {{ venteInfo.categorie }}
+                            </div>
+                            <div class="single-produit-row">
+                                Quantite :                        
+                                {{ venteInfo.quantite }} {{ venteInfo.unite }}
+                            </div>
+                            <div class="single-produit-row">
+                                Prix : 
+                                {{ venteInfo.prix }}
+                                €
+                            </div>
+                            <div class="single-produit-row">
+                                Date limite de consommation : {{ venteInfo.dateLimiteVente }}
+                            </div>
+                            <div class="single-produit-row">
+                                Vendu par {{ venteInfo.producteur.nom }} {{ venteInfo.producteur.prenom }}
+                            </div>
+                        </div>
+                    </div>
+                </nb-card-body>
+            </nb-card>
+        </div>
+        <div class="col-4">
+            <nb-card>
+                <nb-card-header>
+                    Disponible dans les points relais suivants
+    
+                </nb-card-header>
+                <nb-card-body>
+                    <form [formGroup]="achatForm">
+                    <nb-radio-group formControlName="pointRelais">
+                        <nb-radio *ngFor="let unPointRelais of venteInfo.pointRelaisList" value="{{ unPointRelais.id }}">
+                            {{ unPointRelais.typeLibelle }} - {{ unPointRelais.libelle }} : 
+                            {{unPointRelais.adresse}}, {{ unPointRelais.ville }}, {{ unPointRelais.codePostal }}
+                        </nb-radio>
+                    </nb-radio-group>
+                    <button nbButton (click)="submit()">Ajouter au panier</button>
+                    </form>
+                </nb-card-body>
+            </nb-card>
+        </div>
+    </div>
+</div>
+<div *ngIf="error">Une erreur est survenu</div>
+<div *ngIf="notFound">Le produit n'existe pas</div>
+
+
+
