@@ -50,40 +50,7 @@ export class SingleVenteComponent implements OnInit {
       res => {
         if (res.data != null) {
           const data = res.data;
-
-          const getPointRelaisList = () => {
-            let pointRelaisList = [];
-            for (let unPointRelais of data.pointRelais) {
-              pointRelaisList.push({
-                id : unPointRelais.pointRelaisId,
-                adresse : unPointRelais.pointRelaisAdresse,
-                ville : unPointRelais.pointRelaisVille,
-                codePostal : unPointRelais.pointRelaisCodePostal,
-                libelle : unPointRelais.entrepriseLibelle,
-                typeId : unPointRelais.pointRelaisTypeId,
-                typeLibelle : unPointRelais.pointRelaisTypeLibelle
-              });
-            }
-            return pointRelaisList;
-          };
-
-          this.venteInfo = {
-            id : data.venteId,
-            prix : data.prix,
-            quantite : data.quantite,
-            dateAjout : data.dateAjout,
-            dateLimiteVente : data.dateLimiteVente,
-            producteur : {
-              nom : data.prodNom,
-              prenom : data.prodPrenom
-            },
-            unite : data.uniteLibelle,
-            variete : data.varieteLibelle,
-            produit : data.produitLibelle,
-            categorie : data.categorieLibelle,
-            image : data.produitImage,
-            pointRelaisList: getPointRelaisList()
-          }  
+          this.venteInfo = this.clientService.resultToVenteInfo(data);
         } else {
           this.notFound = true;
         }
@@ -116,8 +83,10 @@ export class SingleVenteComponent implements OnInit {
     if (nouvelleArticle != null) {
       this.clientService.addArticle(nouvelleArticle).subscribe(
         res => {
-          if(res.new.status == true)
-            this.router.navigate(["/client/panier"])
+          if(res.new.status == true) {
+            this.clientService.updatePanier(this.authService.contextId);
+            this.router.navigate(["/client/panier"]);
+          }
           else
             console.log(res.new.message)
         },
