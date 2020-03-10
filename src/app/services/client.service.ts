@@ -117,9 +117,9 @@ export class ClientService {
     )
   }
 
-  removeArticle(idVente): Observable<any> {
+  removeArticle(idVente, idClient): Observable<any> {
     //Ajouter un article dans bdd
-    const article = {idVente : idVente};
+    const article = {idVente : idVente, idClient : idClient};
     return this.httpClient.post(this.articleRemoveUrl,JSON.stringify(article)).pipe(
       tap(
         () => console.log(`supprimer un article`)
