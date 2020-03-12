@@ -38,7 +38,9 @@
             <nb-card-body>
                 <p>Nombre d'article : {{ getNombreArticle() }}</p>
                 <p>Total : <b>{{ getSommePanier() }} €</b></p>
-                <button nbButton status="success">Commander</button>
+                <button nbButton status="success"
+                [disabled]="articleList==null"
+                (click)="order()">Commander</button>
             </nb-card-body>
         </nb-card>
     </div>

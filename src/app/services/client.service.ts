@@ -20,6 +20,7 @@ export class ClientService {
   private articleAddUrl = "http://www.sylvain-bourbousse.fr/api/article_add.php";
   private articleListUrl = "http://www.sylvain-bourbousse.fr/api/article_list.php";
   private articleRemoveUrl = "http://www.sylvain-bourbousse.fr/api/article_remove.php";
+  private commandeAddUrl = "http://www.sylvain-bourbousse.fr/api/commande_add.php"
 
   panier: VenteInfo[];
   venteIdPanier;
@@ -125,6 +126,16 @@ export class ClientService {
         () => console.log(`supprimer un article`)
       ),
       catchError(this.handleError<Vente>("removeArticle"))
+    )
+  }
+
+  addCommande(idClient): Observable<any> {
+    const client = {idClient: idClient};
+    return this.httpClient.post(this.commandeAddUrl, JSON.stringify(client)).pipe(
+      tap(
+        () => console.log(`Ajout de commande`)
+      ),
+      catchError(this.handleError<Vente>("addCommande"))
     )
   }
 
