@@ -55,7 +55,7 @@ export class PanierComponent implements OnInit {
     )
   }
 
-  order(clientId) {
+  order() {
     this.clientService.addCommande(this.authService.contextId).subscribe(
       res => {
         if(res.update.status==true) {
