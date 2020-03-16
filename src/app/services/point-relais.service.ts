@@ -3,6 +3,8 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { User } from "../models/user.model";
 import { catchError } from "rxjs/operators";
 import { Observable, of } from "rxjs";
+import { environment } from '../models/api.model';
+
 
 
 @Injectable({
@@ -11,9 +13,9 @@ import { Observable, of } from "rxjs";
 export class PointRelaisService {
   constructor(private http: HttpClient) {}
 
-  private pointRelaisListUrl: string = "http://sylvain-bourbousse.fr/api/pointRelais_list.php";
-  private pointRelaisTypeListUrl: string = "http://sylvain-bourbousse.fr/api/pointRelaisType_list.php";
-  private producteurListUrl: string = "http://sylvain-bourbousse.fr/api/producteur_list.php";
+  private pointRelaisListUrl: string =  environment.apiUrl+"pointRelais_list.php";
+  private pointRelaisTypeListUrl: string =  environment.apiUrl+"pointRelaisType_list.php";
+  private producteurListUrl: string =  environment.apiUrl+"producteur_list.php";
 
 
   httpOptions = {

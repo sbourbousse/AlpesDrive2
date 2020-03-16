@@ -6,6 +6,7 @@ import { Observable, of, BehaviorSubject } from "rxjs";
 import { Categorie } from "../models/categorie.model";
 import { Vente } from 'src/app/models/vente.model';
 import { AuthService } from './auth.service';
+import { environment } from '../models/api.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,11 +15,11 @@ export class ProducteurService {
 
   constructor(private http: HttpClient) {}
 
-  private categorieListUrl: string = "http://sylvain-bourbousse.fr/api/categorie_list.php";
-  private produitListUrl: string = "http://sylvain-bourbousse.fr/api/produit_list.php";
-  private varieteListUrl: string = "http://sylvain-bourbousse.fr/api/variete_list.php";
-  private venteAddUrl: string = "http://sylvain-bourbousse.fr/api/vente_add.php";
-  private venteListUrl: string = "http://sylvain-bourbousse.fr/api/vente_list.php";
+  private categorieListUrl: string = environment.apiUrl+"categorie_list.php";
+  private produitListUrl: string = environment.apiUrl+"produit_list.php";
+  private varieteListUrl: string = environment.apiUrl+"variete_list.php";
+  private venteAddUrl: string = environment.apiUrl+"vente_add.php";
+  private venteListUrl: string = environment.apiUrl+"vente_list.php";
 
 
   

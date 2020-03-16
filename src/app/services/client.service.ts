@@ -5,6 +5,8 @@ import { tap, catchError } from 'rxjs/operators'
 import { Vente, VenteInfo } from '../models/vente.model';
 import { Article } from '../models/article.model';
 import { AuthService } from './auth.service';
+import { environment } from '../models/api.model';
+
 
 @Injectable({
   providedIn: 'root'
@@ -15,12 +17,12 @@ export class ClientService {
     private httpClient : HttpClient
     ) {}
 
-  private venteListUrl = "http://www.sylvain-bourbousse.fr/api/product_list.php";
-  private singleVenteUrl = "http://www.sylvain-bourbousse.fr/api/product_detail.php";
-  private articleAddUrl = "http://www.sylvain-bourbousse.fr/api/article_add.php";
-  private articleListUrl = "http://www.sylvain-bourbousse.fr/api/article_list.php";
-  private articleRemoveUrl = "http://www.sylvain-bourbousse.fr/api/article_remove.php";
-  private commandeAddUrl = "http://www.sylvain-bourbousse.fr/api/commande_add.php"
+  private venteListUrl =  environment.apiUrl+"product_list.php";
+  private singleVenteUrl =  environment.apiUrl+"product_detail.php";
+  private articleAddUrl =  environment.apiUrl+"article_add.php";
+  private articleListUrl =  environment.apiUrl+"article_list.php";
+  private articleRemoveUrl =  environment.apiUrl+"article_remove.php";
+  private commandeAddUrl =  environment.apiUrl+"commande_add.php"
 
   panier: VenteInfo[];
   venteIdPanier;

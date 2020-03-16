@@ -9,6 +9,8 @@ import { Client } from "../models/client.model";
 import { TestBed } from '@angular/core/testing'
 import { Router } from '@angular/router'
 import { ClientService } from './client.service'
+import { environment } from '../models/api.model';
+
 
 @Injectable({
   providedIn: "root"
@@ -31,13 +33,13 @@ export class AuthService {
   producteurList; // ne concerne que les point-relais
 
   
-  private authUrl: string = "http://sylvain-bourbousse.fr/api/auth.php";
+  private authUrl: string =  environment.apiUrl+"auth.php";
   private signupProducteurUrl: string =
-    "http://sylvain-bourbousse.fr/api/producteur_add.php";
+     environment.apiUrl+"producteur_add.php";
   private signupPointRelaisUrl: string =
-    "http://sylvain-bourbousse.fr/api/pointRelais_add.php";
+     environment.apiUrl+"pointRelais_add.php";
   private signupClientUrl: string =
-    "http://sylvain-bourbousse.fr/api/client_add.php";
+     environment.apiUrl+"client_add.php";
 
   httpOptions = {
     headers: new HttpHeaders({ "Content-Type": "application/json" })
