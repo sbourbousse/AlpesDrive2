@@ -1,4 +1,4 @@
 export const environment = {
     production: false,
-    apiUrl: 'https://alpesdrive.azurewebsites.net/'
+    apiUrl: 'http://sylvain-bourbousse.fr/api/'
   };
